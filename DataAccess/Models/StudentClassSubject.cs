@@ -1,8 +1,8 @@
-﻿using PRN221_Project_WPF.DataAccess.Models;
+﻿using ProjectPRN_FAP.DataAccess.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PRN221_Project_RazorPage.Models
+namespace ProjectPRN_FAP.Models
 {
     public class StudentClassSubject
     {
@@ -16,6 +16,6 @@ namespace PRN221_Project_RazorPage.Models
         public ClassSubject ClassSubject { get; set; }
 
         [Required]
-        public Boolean isDelete;
+        public bool IsDelete { get; set; }
     }
 }

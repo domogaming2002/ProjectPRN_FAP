@@ -1,6 +1,6 @@
-﻿using PRN221_Project_WPF.DataAccess.Models;
+﻿using ProjectPRN_FAP.DataAccess.Models;
 
-namespace PRN221_Project_RazorPage.Bussiness.DTO
+namespace ProjectPRN_FAP.Bussiness.DTO
 {
     public class SemesterDTO
     {

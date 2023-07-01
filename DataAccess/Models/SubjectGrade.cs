@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PRN221_Project_WPF.DataAccess.Models
+namespace ProjectPRN_FAP.DataAccess.Models
 {
     public class SubjectGrade
     {
@@ -14,6 +14,6 @@ namespace PRN221_Project_WPF.DataAccess.Models
         public int GradeId { get; set; }
         public Grade Grade { get; set; }
         [Required]
-        public Boolean isDelete;
+        public bool IsDelete { get; set; }
     }
 }

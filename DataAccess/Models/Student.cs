@@ -1,7 +1,7 @@
-﻿using PRN221_Project_WPF.DataAccess.Models;
+﻿using ProjectPRN_FAP.DataAccess.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace PRN221_Project_RazorPage.Models
+namespace ProjectPRN_FAP.Models
 {
     public class Student
     {
@@ -13,7 +13,7 @@ namespace PRN221_Project_RazorPage.Models
         [Required]
         public String StudentCode { get; set; }
         [Required]
-        public Boolean isDelete;
+        public bool IsDelete { get; set; }
 
         public User User { get; set; }
         

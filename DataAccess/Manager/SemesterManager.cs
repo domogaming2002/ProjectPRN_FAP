@@ -1,8 +1,8 @@
-﻿using PRN221_Project_RazorPage.DataAccess.Data;
-using PRN221_Project_RazorPage.DataAccess.Models;
-using PRN221_Project_WPF.DataAccess.Models;
+﻿using ProjectPRN_FAP.DataAccess.Data;
+using ProjectPRN_FAP.DataAccess.Models;
+using ProjectPRN_FAP.DataAccess.Models;
 
-namespace PRN221_Project_RazorPage.DataAccess.Manager
+namespace ProjectPRN_FAP.DataAccess.Manager
 {
     public class SemesterManager
     {
@@ -12,7 +12,7 @@ namespace PRN221_Project_RazorPage.DataAccess.Manager
 
         public List<Semester>? GetList()
         {
-            return _context.Semesters.ToList();
+            return _context.Semesters.Where(s => s.IsDelete == false).ToList();
         }
 
         public Semester? GetById(int semesterId)
@@ -35,7 +35,9 @@ namespace PRN221_Project_RazorPage.DataAccess.Manager
         {
             try
             {
-                _context.Semesters.Remove(semester);
+                Semester semester1 = GetById(semester.SemesterId);
+                semester1.IsDelete = true;
+                _context.Semesters.Update(semester1);
                 _context.SaveChanges();
                 if (_context.SaveChanges() > 0)
                 {
@@ -53,7 +55,13 @@ namespace PRN221_Project_RazorPage.DataAccess.Manager
         {
             try
             {
-                _context.Semesters.Update(semester);
+                Semester semester1 = GetById(semester.SemesterId);
+
+                semester1.SemesterName = semester.SemesterName;
+                semester1.StartDate = semester.StartDate;
+                semester1.EndDate = semester.EndDate;
+
+                _context.Semesters.Update(semester1);
                 _context.SaveChanges();
                 if (_context.SaveChanges() > 0)
                 {

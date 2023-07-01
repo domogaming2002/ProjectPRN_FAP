@@ -1,6 +1,6 @@
-﻿using PRN221_Project_RazorPage.Bussiness.DTO;
+﻿using ProjectPRN_FAP.Bussiness.DTO;
 
-namespace PRN221_Project_RazorPage.Bussiness.IRepository
+namespace ProjectPRN_FAP.Bussiness.IRepository
 {
     public interface ISemesterRepository
     {

@@ -1,7 +1,7 @@
 ﻿
 using AutoMapper;
-using PRN221_Project_RazorPage.Bussiness.DTO;
-using PRN221_Project_RazorPage.DataAccess.Models;
+using ProjectPRN_FAP.Bussiness.DTO;
+using ProjectPRN_FAP.DataAccess.Models;
 
 namespace DemoNorthwindWithEF.Bussiness.Mapping
 {

@@ -1,5 +1,4 @@
-﻿using PRN221_Project_RazorPage.DataAccess.Models;
-using PRN221_Project_RazorPage.Models;
+﻿using ProjectPRN_FAP.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PRN221_Project_WPF.DataAccess.Models
+namespace ProjectPRN_FAP.DataAccess.Models
 {
     public class ClassSubject
     {
@@ -26,7 +25,7 @@ namespace PRN221_Project_WPF.DataAccess.Models
 
         public int SemesterId { get; set; }
         [Required]
-        public Boolean isDelete;
+        public bool IsDelete { get; set; }
         public ICollection<StudentClassSubject> StudentClassSubjects { get; set; }
         public ICollection<Transcript> Transcripts { get; set; }
 

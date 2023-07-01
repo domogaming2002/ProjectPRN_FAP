@@ -1,4 +1,4 @@
-﻿using PRN221_Project_RazorPage.Models;
+﻿using ProjectPRN_FAP.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PRN221_Project_WPF.DataAccess.Models
+namespace ProjectPRN_FAP.DataAccess.Models
 {
     public class Transcript
     {
@@ -23,7 +23,7 @@ namespace PRN221_Project_WPF.DataAccess.Models
         [AllowNull]
         public Double TotalScore { get; set; }
         [Required]
-        public Boolean isDelete;
+        public bool IsDelete { get; set; }
 
         public Student Students { get; set; }
         public Subject Subject { get; set; }

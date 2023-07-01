@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PRN221_Project_RazorPage.DataAccess.Models;
-using PRN221_Project_RazorPage.Models;
-using PRN221_Project_WPF.DataAccess.Models;
+using ProjectPRN_FAP.DataAccess.Models;
+using ProjectPRN_FAP.Models;
 
-namespace PRN221_Project_RazorPage.DataAccess.Data
+namespace ProjectPRN_FAP.DataAccess.Data
 {
     public class DataContext : DbContext
     {

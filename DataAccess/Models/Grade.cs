@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PRN221_Project_WPF.DataAccess.Models
+namespace ProjectPRN_FAP.DataAccess.Models
 {
     public class Grade
     {
@@ -17,6 +17,6 @@ namespace PRN221_Project_WPF.DataAccess.Models
         public double Percent { get; set; }
         public ICollection<SubjectGrade> SubjectGrades { get; set; }
         [Required]
-        public Boolean isDelete;
+        public bool IsDelete { get; set; }
     }
 }

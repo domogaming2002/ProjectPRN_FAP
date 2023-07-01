@@ -1,0 +1,1 @@
+﻿INSERT INTO Semesters (SemesterName,StartDate,EndDate) VALUES ('SP22','2023-06-30','2023-06-30')

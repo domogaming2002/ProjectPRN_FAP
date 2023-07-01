@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PRN221_Project_RazorPage.DataAccess.Data;
+using ProjectPRN_FAP.DataAccess.Data;
 
 #nullable disable
 
-namespace PRN221_Project_RazorPage.DataAccess.Data
+namespace ProjectPRN_FAP.DataAccess.Data
 {
     [DbContext(typeof(DataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot
@@ -22,97 +22,7 @@ namespace PRN221_Project_RazorPage.DataAccess.Data
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("PRN221_Project_RazorPage.DataAccess.Models.Semester", b =>
-                {
-                    b.Property<int>("SemesterId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SemesterId"), 1L, 1);
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("SemesterName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("SemesterId");
-
-                    b.ToTable("Semesters");
-                });
-
-            modelBuilder.Entity("PRN221_Project_RazorPage.Models.Student", b =>
-                {
-                    b.Property<int>("StudentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentId"), 1L, 1);
-
-                    b.Property<string>("StudentCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("StudentId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Students");
-                });
-
-            modelBuilder.Entity("PRN221_Project_RazorPage.Models.StudentClassSubject", b =>
-                {
-                    b.Property<int>("StudentClassSubjectId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentClassSubjectId"), 1L, 1);
-
-                    b.Property<int>("ClasSubjectId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("StudentClassSubjectId");
-
-                    b.HasIndex("ClasSubjectId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("StudentClassSubjects");
-                });
-
-            modelBuilder.Entity("PRN221_Project_RazorPage.Models.Teacher", b =>
-                {
-                    b.Property<int>("TeacherId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TeacherId"), 1L, 1);
-
-                    b.Property<string>("TeacherCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TeacherId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Teachers");
-                });
-
-            modelBuilder.Entity("PRN221_Project_WPF.DataAccess.Models.Class", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.DataAccess.Models.Class", b =>
                 {
                     b.Property<int>("ClassId")
                         .ValueGeneratedOnAdd()
@@ -124,12 +34,15 @@ namespace PRN221_Project_RazorPage.DataAccess.Data
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
                     b.HasKey("ClassId");
 
                     b.ToTable("Classes");
                 });
 
-            modelBuilder.Entity("PRN221_Project_WPF.DataAccess.Models.ClassSubject", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.DataAccess.Models.ClassSubject", b =>
                 {
                     b.Property<int>("ClassSubjectId")
                         .ValueGeneratedOnAdd()
@@ -139,6 +52,9 @@ namespace PRN221_Project_RazorPage.DataAccess.Data
 
                     b.Property<int>("ClassId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<int>("SemesterId")
                         .HasColumnType("int");
@@ -162,7 +78,7 @@ namespace PRN221_Project_RazorPage.DataAccess.Data
                     b.ToTable("ClassSubjects");
                 });
 
-            modelBuilder.Entity("PRN221_Project_WPF.DataAccess.Models.DetailScore", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.DataAccess.Models.DetailScore", b =>
                 {
                     b.Property<int>("DetailScoreId")
                         .ValueGeneratedOnAdd()
@@ -172,6 +88,9 @@ namespace PRN221_Project_RazorPage.DataAccess.Data
 
                     b.Property<int>("GradeId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<double>("Score")
                         .HasColumnType("float");
@@ -186,7 +105,7 @@ namespace PRN221_Project_RazorPage.DataAccess.Data
                     b.ToTable("DetailScores");
                 });
 
-            modelBuilder.Entity("PRN221_Project_WPF.DataAccess.Models.Grade", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.DataAccess.Models.Grade", b =>
                 {
                     b.Property<int>("GradeID")
                         .ValueGeneratedOnAdd()
@@ -198,6 +117,9 @@ namespace PRN221_Project_RazorPage.DataAccess.Data
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
                     b.Property<double>("Percent")
                         .HasColumnType("float");
 
@@ -206,13 +128,16 @@ namespace PRN221_Project_RazorPage.DataAccess.Data
                     b.ToTable("Grades");
                 });
 
-            modelBuilder.Entity("PRN221_Project_WPF.DataAccess.Models.Role", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.DataAccess.Models.Role", b =>
                 {
                     b.Property<int>("RoleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"), 1L, 1);
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<string>("RoleName")
                         .IsRequired()
@@ -223,13 +148,42 @@ namespace PRN221_Project_RazorPage.DataAccess.Data
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("PRN221_Project_WPF.DataAccess.Models.Subject", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.DataAccess.Models.Semester", b =>
+                {
+                    b.Property<int>("SemesterId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SemesterId"), 1L, 1);
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SemesterName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("SemesterId");
+
+                    b.ToTable("Semesters");
+                });
+
+            modelBuilder.Entity("ProjectPRN_FAP.DataAccess.Models.Subject", b =>
                 {
                     b.Property<int>("SubjectId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubjectId"), 1L, 1);
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<string>("SubjectName")
                         .IsRequired()
@@ -244,13 +198,16 @@ namespace PRN221_Project_RazorPage.DataAccess.Data
                     b.ToTable("Subjects");
                 });
 
-            modelBuilder.Entity("PRN221_Project_WPF.DataAccess.Models.SubjectGrade", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.DataAccess.Models.SubjectGrade", b =>
                 {
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
                     b.Property<int>("GradeId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.HasKey("SubjectId", "GradeId");
 
@@ -259,7 +216,7 @@ namespace PRN221_Project_RazorPage.DataAccess.Data
                     b.ToTable("SubjectGrades");
                 });
 
-            modelBuilder.Entity("PRN221_Project_WPF.DataAccess.Models.Transcript", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.DataAccess.Models.Transcript", b =>
                 {
                     b.Property<int>("TranscriptId")
                         .ValueGeneratedOnAdd()
@@ -269,6 +226,9 @@ namespace PRN221_Project_RazorPage.DataAccess.Data
 
                     b.Property<int>("ClassSubjectId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
@@ -290,7 +250,7 @@ namespace PRN221_Project_RazorPage.DataAccess.Data
                     b.ToTable("Transcripts");
                 });
 
-            modelBuilder.Entity("PRN221_Project_WPF.DataAccess.Models.User", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.DataAccess.Models.User", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -310,6 +270,9 @@ namespace PRN221_Project_RazorPage.DataAccess.Data
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Gender")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -332,68 +295,103 @@ namespace PRN221_Project_RazorPage.DataAccess.Data
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("PRN221_Project_RazorPage.Models.Student", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.Models.Student", b =>
                 {
-                    b.HasOne("PRN221_Project_WPF.DataAccess.Models.User", "User")
-                        .WithMany("Students")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("StudentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Navigation("User");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentId"), 1L, 1);
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("StudentCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("StudentId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("PRN221_Project_RazorPage.Models.StudentClassSubject", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.Models.StudentClassSubject", b =>
                 {
-                    b.HasOne("PRN221_Project_WPF.DataAccess.Models.ClassSubject", "ClassSubject")
-                        .WithMany("StudentClassSubjects")
-                        .HasForeignKey("ClasSubjectId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                    b.Property<int>("StudentClassSubjectId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.HasOne("PRN221_Project_RazorPage.Models.Student", "Student")
-                        .WithMany("StudentClassSubjects")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentClassSubjectId"), 1L, 1);
 
-                    b.Navigation("ClassSubject");
+                    b.Property<int>("ClasSubjectId")
+                        .HasColumnType("int");
 
-                    b.Navigation("Student");
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("StudentClassSubjectId");
+
+                    b.HasIndex("ClasSubjectId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("StudentClassSubjects");
                 });
 
-            modelBuilder.Entity("PRN221_Project_RazorPage.Models.Teacher", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.Models.Teacher", b =>
                 {
-                    b.HasOne("PRN221_Project_WPF.DataAccess.Models.User", "User")
-                        .WithMany("Teachers")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("TeacherId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Navigation("User");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TeacherId"), 1L, 1);
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("TeacherCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TeacherId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Teachers");
                 });
 
-            modelBuilder.Entity("PRN221_Project_WPF.DataAccess.Models.ClassSubject", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.DataAccess.Models.ClassSubject", b =>
                 {
-                    b.HasOne("PRN221_Project_WPF.DataAccess.Models.Class", "Class")
+                    b.HasOne("ProjectPRN_FAP.DataAccess.Models.Class", "Class")
                         .WithMany("classSubjects")
                         .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PRN221_Project_RazorPage.DataAccess.Models.Semester", "Semester")
+                    b.HasOne("ProjectPRN_FAP.DataAccess.Models.Semester", "Semester")
                         .WithMany("ClassSubjects")
                         .HasForeignKey("SemesterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PRN221_Project_WPF.DataAccess.Models.Subject", "Subject")
+                    b.HasOne("ProjectPRN_FAP.DataAccess.Models.Subject", "Subject")
                         .WithMany("ClassSubjects")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PRN221_Project_RazorPage.Models.Teacher", "Teacher")
+                    b.HasOne("ProjectPRN_FAP.Models.Teacher", "Teacher")
                         .WithMany("ClassSubjects")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -408,9 +406,9 @@ namespace PRN221_Project_RazorPage.DataAccess.Data
                     b.Navigation("Teacher");
                 });
 
-            modelBuilder.Entity("PRN221_Project_WPF.DataAccess.Models.DetailScore", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.DataAccess.Models.DetailScore", b =>
                 {
-                    b.HasOne("PRN221_Project_WPF.DataAccess.Models.Transcript", "Transcript")
+                    b.HasOne("ProjectPRN_FAP.DataAccess.Models.Transcript", "Transcript")
                         .WithMany("DetailScores")
                         .HasForeignKey("TranscriptId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -419,15 +417,15 @@ namespace PRN221_Project_RazorPage.DataAccess.Data
                     b.Navigation("Transcript");
                 });
 
-            modelBuilder.Entity("PRN221_Project_WPF.DataAccess.Models.SubjectGrade", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.DataAccess.Models.SubjectGrade", b =>
                 {
-                    b.HasOne("PRN221_Project_WPF.DataAccess.Models.Grade", "Grade")
+                    b.HasOne("ProjectPRN_FAP.DataAccess.Models.Grade", "Grade")
                         .WithMany("SubjectGrades")
                         .HasForeignKey("GradeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PRN221_Project_WPF.DataAccess.Models.Subject", "Subject")
+                    b.HasOne("ProjectPRN_FAP.DataAccess.Models.Subject", "Subject")
                         .WithMany("SubjectGrades")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -438,21 +436,21 @@ namespace PRN221_Project_RazorPage.DataAccess.Data
                     b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("PRN221_Project_WPF.DataAccess.Models.Transcript", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.DataAccess.Models.Transcript", b =>
                 {
-                    b.HasOne("PRN221_Project_WPF.DataAccess.Models.ClassSubject", "ClassSubject")
+                    b.HasOne("ProjectPRN_FAP.DataAccess.Models.ClassSubject", "ClassSubject")
                         .WithMany("Transcripts")
                         .HasForeignKey("ClassSubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PRN221_Project_RazorPage.Models.Student", "Students")
+                    b.HasOne("ProjectPRN_FAP.Models.Student", "Students")
                         .WithMany("Transcripts")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("PRN221_Project_WPF.DataAccess.Models.Subject", "Subject")
+                    b.HasOne("ProjectPRN_FAP.DataAccess.Models.Subject", "Subject")
                         .WithMany("Transcripts")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -465,41 +463,70 @@ namespace PRN221_Project_RazorPage.DataAccess.Data
                     b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("PRN221_Project_RazorPage.DataAccess.Models.Semester", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.Models.Student", b =>
                 {
-                    b.Navigation("ClassSubjects");
+                    b.HasOne("ProjectPRN_FAP.DataAccess.Models.User", "User")
+                        .WithMany("Students")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("PRN221_Project_RazorPage.Models.Student", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.Models.StudentClassSubject", b =>
                 {
-                    b.Navigation("StudentClassSubjects");
+                    b.HasOne("ProjectPRN_FAP.DataAccess.Models.ClassSubject", "ClassSubject")
+                        .WithMany("StudentClassSubjects")
+                        .HasForeignKey("ClasSubjectId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
-                    b.Navigation("Transcripts");
+                    b.HasOne("ProjectPRN_FAP.Models.Student", "Student")
+                        .WithMany("StudentClassSubjects")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("ClassSubject");
+
+                    b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("PRN221_Project_RazorPage.Models.Teacher", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.Models.Teacher", b =>
                 {
-                    b.Navigation("ClassSubjects");
+                    b.HasOne("ProjectPRN_FAP.DataAccess.Models.User", "User")
+                        .WithMany("Teachers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("PRN221_Project_WPF.DataAccess.Models.Class", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.DataAccess.Models.Class", b =>
                 {
                     b.Navigation("classSubjects");
                 });
 
-            modelBuilder.Entity("PRN221_Project_WPF.DataAccess.Models.ClassSubject", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.DataAccess.Models.ClassSubject", b =>
                 {
                     b.Navigation("StudentClassSubjects");
 
                     b.Navigation("Transcripts");
                 });
 
-            modelBuilder.Entity("PRN221_Project_WPF.DataAccess.Models.Grade", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.DataAccess.Models.Grade", b =>
                 {
                     b.Navigation("SubjectGrades");
                 });
 
-            modelBuilder.Entity("PRN221_Project_WPF.DataAccess.Models.Subject", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.DataAccess.Models.Semester", b =>
+                {
+                    b.Navigation("ClassSubjects");
+                });
+
+            modelBuilder.Entity("ProjectPRN_FAP.DataAccess.Models.Subject", b =>
                 {
                     b.Navigation("ClassSubjects");
 
@@ -508,16 +535,28 @@ namespace PRN221_Project_RazorPage.DataAccess.Data
                     b.Navigation("Transcripts");
                 });
 
-            modelBuilder.Entity("PRN221_Project_WPF.DataAccess.Models.Transcript", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.DataAccess.Models.Transcript", b =>
                 {
                     b.Navigation("DetailScores");
                 });
 
-            modelBuilder.Entity("PRN221_Project_WPF.DataAccess.Models.User", b =>
+            modelBuilder.Entity("ProjectPRN_FAP.DataAccess.Models.User", b =>
                 {
                     b.Navigation("Students");
 
                     b.Navigation("Teachers");
+                });
+
+            modelBuilder.Entity("ProjectPRN_FAP.Models.Student", b =>
+                {
+                    b.Navigation("StudentClassSubjects");
+
+                    b.Navigation("Transcripts");
+                });
+
+            modelBuilder.Entity("ProjectPRN_FAP.Models.Teacher", b =>
+                {
+                    b.Navigation("ClassSubjects");
                 });
 #pragma warning restore 612, 618
         }

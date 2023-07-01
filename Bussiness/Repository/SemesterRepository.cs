@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using AutoMapper.Execution;
-using PRN221_Project_RazorPage.Bussiness.DTO;
-using PRN221_Project_RazorPage.Bussiness.IRepository;
-using PRN221_Project_RazorPage.DataAccess.Data;
-using PRN221_Project_RazorPage.DataAccess.Manager;
-using PRN221_Project_RazorPage.DataAccess.Models;
+using ProjectPRN_FAP.Bussiness.DTO;
+using ProjectPRN_FAP.Bussiness.IRepository;
+using ProjectPRN_FAP.DataAccess.Data;
+using ProjectPRN_FAP.DataAccess.Manager;
+using ProjectPRN_FAP.DataAccess.Models;
 
-namespace PRN221_Project_RazorPage.Bussiness.Repository
+namespace ProjectPRN_FAP.Bussiness.Repository
 {
     public class SemesterRepository : ISemesterRepository
     {
@@ -37,7 +37,16 @@ namespace PRN221_Project_RazorPage.Bussiness.Repository
 
         public bool Delete(SemesterDTO semester)
         {
-            throw new NotImplementedException();
+            if (GetById(semester.SemesterId) != null)
+            {
+                Semester semester1 = _mapper.Map<Semester>(semester);
+                manager.Delelte(semester1);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public SemesterDTO GetById(int id)
@@ -48,15 +57,22 @@ namespace PRN221_Project_RazorPage.Bussiness.Repository
         public List<SemesterDTO> GetList()
         {
             List<SemesterDTO> semesterDTOs;
-
-
             semesterDTOs = _mapper.Map<List<SemesterDTO>>(manager.GetList());
             return semesterDTOs;
         }
 
         public bool Update(SemesterDTO semester)
         {
-            throw new NotImplementedException();
+            if (GetById(semester.SemesterId) != null)
+            {
+                Semester semester1 = _mapper.Map<Semester>(semester);
+                manager.Update(semester1);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

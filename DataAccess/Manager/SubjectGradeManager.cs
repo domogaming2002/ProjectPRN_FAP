@@ -1,7 +1,7 @@
-﻿using PRN221_Project_RazorPage.DataAccess.Data;
-using PRN221_Project_WPF.DataAccess.Models;
+﻿using ProjectPRN_FAP.DataAccess.Data;
+using ProjectPRN_FAP.DataAccess.Models;
 
-namespace PRN221_Project_RazorPage.DataAccess.Manager
+namespace ProjectPRN_FAP.DataAccess.Manager
 {
     public class SubjectGradeManager
     {

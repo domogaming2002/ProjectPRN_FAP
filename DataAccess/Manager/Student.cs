@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PRN221_Project_RazorPage.DataAccess.Data;
+using ProjectPRN_FAP.DataAccess.Data;
 
-namespace PRN221_Project_RazorPage.DataAccess.Manager
+namespace ProjectPRN_FAP.DataAccess.Manager
 {
     public class Student 
     {

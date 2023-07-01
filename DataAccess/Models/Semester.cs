@@ -1,7 +1,7 @@
-﻿using PRN221_Project_WPF.DataAccess.Models;
+﻿using ProjectPRN_FAP.DataAccess.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace PRN221_Project_RazorPage.DataAccess.Models
+namespace ProjectPRN_FAP.DataAccess.Models
 {
     public class Semester
     {
@@ -14,7 +14,7 @@ namespace PRN221_Project_RazorPage.DataAccess.Models
         public DateTime EndDate { get; set; }
 
         [Required]
-        public Boolean isDelete;
+        public bool IsDelete { get; set; }
 
         public ICollection<ClassSubject> ClassSubjects { get; set; }
     }
