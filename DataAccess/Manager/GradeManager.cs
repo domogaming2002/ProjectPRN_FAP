@@ -11,7 +11,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
 
         public List<Grade>? GetList()
         {
-            return _context.Grades.ToList();
+            return _context.Grades.Where(g => g.IsDelete == false).ToList();
         }
 
         public Grade? GetById(int gradeId)
@@ -34,7 +34,9 @@ namespace ProjectPRN_FAP.DataAccess.Manager
         {
             try
             {
-                _context.Grades.Remove(grade);
+                Grade grade1 = GetById(grade.GradeID);
+                grade1.IsDelete = true;
+                _context.Grades.Update(grade1);
                 _context.SaveChanges();
                 if (_context.SaveChanges() > 0)
                 {
@@ -52,7 +54,10 @@ namespace ProjectPRN_FAP.DataAccess.Manager
         {
             try
             {
-                _context.Grades.Update(grade);
+                Grade grade1 = GetById(grade.GradeID);
+                grade1.GradeName = grade.GradeName;
+                grade1.Percent = grade1.Percent;
+                _context.Grades.Update(grade1);
                 _context.SaveChanges();
                 if (_context.SaveChanges() > 0)
                 {

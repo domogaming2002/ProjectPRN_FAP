@@ -13,7 +13,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
 
         public List<Class>? GetList()
         {
-            return _context.Classes.ToList();
+            return _context.Classes.Where(s => s.IsDelete == false).ToList();
         }
 
         public Class? GetById(int classId)
@@ -36,7 +36,9 @@ namespace ProjectPRN_FAP.DataAccess.Manager
         {
             try
             {
-                _context.Classes.Remove(classe);
+                Class? clase = GetById(classe.ClassId);
+                clase.IsDelete = true;
+                _context.Classes.Update(clase);
                 _context.SaveChanges();
                 if (_context.SaveChanges() > 0)
                 {
@@ -54,7 +56,9 @@ namespace ProjectPRN_FAP.DataAccess.Manager
         {
             try
             {
-                _context.Classes.Update(classe);
+                Class? classe1 = GetById(classe.ClassId);
+                classe1.ClassName = classe.ClassName;
+                _context.Classes.Update(classe1);
                 _context.SaveChanges();
                 if (_context.SaveChanges() > 0)
                 {

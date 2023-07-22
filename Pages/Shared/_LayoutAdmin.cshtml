@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] FAP</title>
     @*<link rel="stylesheet" href="~/css/sketchy.css"/>*@
     <link rel="stylesheet" href="~/css/styles.css" />
-    
+
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/mdb.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -63,11 +63,23 @@
                     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                         <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span class="fs-5 d-none d-sm-inline">Menu</span>
-                        </a> 
-                        <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        </a>
+                        <a asp-page="/Admin/SemesterPage/Semester" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span class="fs-5 d-none d-sm-inline">Semester</span>
                         </a>
-                        
+
+                        <a asp-page="/Admin/ClassPage/Class" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                            <span class="fs-5 d-none d-sm-inline">Class</span>
+                        </a>
+
+                        <a asp-page="/Admin/SubjectPage/Subject" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                            <span class="fs-5 d-none d-sm-inline">Subject</span>
+                        </a>
+
+                        <a asp-page="/Admin/GradePage/Grade" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                            <span class="fs-5 d-none d-sm-inline">Subject</span>
+                        </a>
+
                         <hr>
                         <div class="dropdown pb-4">
                             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -87,10 +99,10 @@
                     </div>
                 </div>
                 <div class="col py-3">
-                   
-        <div class="col py-3">
-            @RenderBody()
-        </div>
+
+                    <div class="col py-3">
+                        @RenderBody()
+                    </div>
                 </div>
             </div>
         </div>
@@ -117,3 +129,21 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+<script>
+    function formatDate(dateObject) {
+        const year = dateObject.getFullYear();
+        const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+        const day = dateObject.getDate().toString().padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
+    function closePopup(modalID) {
+        $('#' + modalID).modal('hide');
+    }
+
+    function openPopupMessage(modalID) {
+        $('#' + modalID).modal('show');
+    }
+
+</script>

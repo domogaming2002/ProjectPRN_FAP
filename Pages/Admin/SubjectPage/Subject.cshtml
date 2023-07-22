@@ -1,27 +1,31 @@
 ﻿@page
-@model ProjectPRN_FAP.Pages.Admin.ClassPage.ClassModel
+@model ProjectPRN_FAP.Pages.Admin.SubjectPage.SubjectModel
 @using ProjectPRN_FAP.Bussiness.DTO
 @{
     Layout = "_LayoutAdmin";
 }
 
-<!-- Button trigger modal create Semester -->
-<button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
-    Create Class
+<!-- Button trigger modal create Subject -->
+<button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#createSubjectModel">
+    Create Semester
 </button>
 
-<!-- Modal Create Semester -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Create Subject -->
+<div class="modal fade" id="createSubjectModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form asp-page="/Admin/ClassPage/Class" method="post">
+        <form asp-page="/Admin/SubjectPage/Subject" method="post">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Create Semester</h5>
                     <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Tên Class</p>
-                    <input type="text" name="className" class="w-100" />
+                    <p>Sub Class name</p>
+                    <input type="text" name="subjectSubName" class="w-100" />
+                    <br />
+                    <p>Class Name</p>
+                    <input type="text" name="subjectNameName" class="w-100" />
+                    <br />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
@@ -32,32 +36,39 @@
     </div>
 </div>
 
-<!-- Table  Class -->
+<!-- List table Subject -->
 <div>
+
     <table class="table align-middle mb-0 bg-white">
         <thead class="bg-light">
             <tr>
-                <th>ClassName</th>
+                <th>Subject Sub Name</th>
+                <th>Subject Name</th>
                 <th>Delete</th>
                 <th>Edit</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (ClassDTO cDto in Model.classDTOs)
+            @foreach (SubjectDTO sDTO in Model.subjectDTOs)
             {
                 <tr>
                     <td>
-                        <p class="fw-normal mb-1">@cDto.ClassName</p>
+                        <p class="fw-normal mb-1">@sDTO.SubjectSubName</p>
+                    </td>
+
+                    <td>
+                        <p class="fw-normal mb-1">@sDTO.SubjectName</p>
                     </td>
                     <td>
                         <button type="button" class="btn btn-link btn-sm btn-rounded"
-                            onclick="openPopupDelete('@cDto.ClassId')">
+                            onclick="openPopupDelete('@sDTO.SubjectId')">
                             Delete
                         </button>
                     </td>
+
                     <td>
                         <button type="button" class="btn btn-link btn-sm btn-rounded"
-                            onclick="openPopup('@cDto.ClassName', '@cDto.ClassId')">
+                            onclick="openPopup('@sDTO.SubjectSubName','@sDTO.SubjectName','@sDTO.SubjectId')">
                             Update
                         </button>
                     </td>
@@ -67,7 +78,7 @@
     </table>
 </div>
 
-<!-- Modal Update Class -->
+<!-- Modal Update Subject -->
 <div class="modal fade" id="updateClassModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form asp-page-handler="Update" method="post">
@@ -77,9 +88,11 @@
                     <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" onclick="closePopup('updateClassModal')"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Tên Class</p>
-                    <input id="updateClassName" type="text" name="updateClassName" class="w-100" />
-                    <input id="updateClassid" type="hidden" name="updateClassid" />
+                    <p>Subject Sub Name</p>
+                    <input id="updateSubjectSubName" type="text" name="updateSubjectSubName" class="w-100" />
+                    <p>Subject Name</p>
+                    <input id="updateSubjectName" type="text" name="updateSubjectName" class="w-100" />
+                    <input id="updateSemesterid" type="hidden" name="updateSubjectId" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick="closePopup('updateClassModal')">Close</button>
@@ -91,21 +104,21 @@
 </div>
 
 
-<!-- Modal Delete Semester -->
-<div class="modal fade" id="deleteClassModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Delete Subject -->
+<div class="modal fade" id="deleteSubjectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form asp-page-handler="Delete" method="post">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Delete Semester</h5>
-                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" onclick="closePopup('deleteClassModal')"></button>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" onclick="closePopup('deleteSubjectModal')"></button>
                 </div>
                 <div class="modal-body">
-                    <input id="deleteClassId" type="hidden" name="deleteClassId" />
-                    <p> Bạn có chắc chắn muốn xóa Class này không ?</p>
+                    <input id="deleteSubjectid" type="hidden" name="subjectId" />
+                    <p> Do you want delete this Subject ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="closePopup('deleteClassModal')">Cancle</button>
+                    <button type="button" class="btn btn-secondary" onclick="closePopup('deleteSubjectModal')">Cancle</button>
                     <button type="submit" class="btn btn-primary">Delete</button>
                 </div>
             </div>
@@ -113,25 +126,26 @@
     </div>
 </div>
 
-
 <!-- Script -->
 <script>
-    function openPopup(className, classId) {
-        var inputName = document.getElementById("updateClassName");
-        inputName.value = className;
+    function openPopup(subjectSubName, subjectName, subjectId) {
+        var inputName = document.getElementById("updateSubjectName");
+        inputName.value = subjectName;
 
-     
-        var inputId = document.getElementById("updateClassid");
-        inputId.value = classId;
+        var inputSubName = document.getElementById("updateSubjectSubName");
+        inputSubName.value = subjectSubName;
+
+        var inputId = document.getElementById("updateSemesterid");
+        inputId.value = subjectId;
 
         $('#updateClassModal').modal('show');
     }
 
-    function openPopupDelete(classId) {
-        var inputId = document.getElementById("deleteClassId");
-        inputId.value = classId;
-        $('#deleteClassModal').modal('show');
+    function openPopupDelete(subjectId) {
+        var inputId = document.getElementById("deleteSubjectid");
+        inputId.value = subjectId;
+        $('#deleteSubjectModal').modal('show');
     }
 
-  
+
 </script>

@@ -9,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddScoped(typeof(ISemesterRepository), typeof(SemesterRepository));
+builder.Services.AddScoped(typeof(IClassRepository), typeof(ClassRepository));
+builder.Services.AddScoped(typeof(ISubjectRepository), typeof(SubjectRepository));
+builder.Services.AddScoped(typeof(IGradeRepository), typeof(GradeRepository));
 
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataConnectString")));
 

@@ -11,7 +11,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
 
         public List<Subject>? GetList()
         {
-            return _context.Subjects.ToList();
+            return _context.Subjects.Where(s => s.IsDelete == false).ToList();
         }
 
         public Subject? GetById(int subjectId)
@@ -34,7 +34,9 @@ namespace ProjectPRN_FAP.DataAccess.Manager
         {
             try
             {
-                _context.Subjects.Remove(subject);
+                Subject subject2 = GetById(subject.SubjectId);
+                subject2.IsDelete = true;
+                _context.Subjects.Update(subject2);
                 _context.SaveChanges();
                 if (_context.SaveChanges() > 0)
                 {
@@ -52,7 +54,10 @@ namespace ProjectPRN_FAP.DataAccess.Manager
         {
             try
             {
-                _context.Subjects.Update(subject);
+                Subject? subject1 = GetById(subject.SubjectId);
+                subject1.SubjectSubName = subject.SubjectSubName;
+                subject1.SubjectName = subject.SubjectName;
+                _context.Subjects.Update(subject1);
                 _context.SaveChanges();
                 if (_context.SaveChanges() > 0)
                 {

@@ -14,7 +14,12 @@ namespace ProjectPRN_FAP.DataAccess.Manager
             return _context.SubjectGrades.ToList();
         }
 
-        public SubjectGrade? GetById(int subjectGradeId, int gradeId)
+        public SubjectGrade? GetBySubjectId(int subjectId)
+        {
+            return _context.SubjectGrades.FirstOrDefault(s => s.SubjectId == subjectId);
+        }
+
+        public SubjectGrade? GetBySubjectGradeId(int subjectGradeId, int gradeId)
         {
             return _context.SubjectGrades.FirstOrDefault(s => s.SubjectId == subjectGradeId && s.GradeId == gradeId);
         }
@@ -34,7 +39,9 @@ namespace ProjectPRN_FAP.DataAccess.Manager
         {
             try
             {
-                _context.SubjectGrades.Remove(subjectGrade);
+                SubjectGrade subject = _context.SubjectGrades.FirstOrDefault(s => s.SubjectId == subjectGrade.SubjectId && s.GradeId == subjectGrade.GradeId);
+                subject.IsDelete = true;
+                _context.SubjectGrades.Update(subject);
                 _context.SaveChanges();
                 if (_context.SaveChanges() > 0)
                 {

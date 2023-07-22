@@ -1,0 +1,109 @@
+﻿@page
+@model ProjectPRN_FAP.Pages.Admin.GradePage.GradeModel
+@using ProjectPRN_FAP.Bussiness.DTO
+@{
+    Layout = "_LayoutAdmin";
+}
+
+<!--Error message -->
+@if (TempData["ErrorMessage"] != null)
+{
+    <div id="myDiv">Hello, world!</div>
+    <script>
+        window.onload = function () {
+            openPopupMessage('ErrorMessageGradeModal');
+        };
+
+    </script>
+
+    <div class="modal fade" id="ErrorMessageGradeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Message</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" onclick="closePopup('ErrorMessageGradeModal')"></button>
+                </div>
+            </div>
+            <div class="modal-body" style="background-color: #ffffff;">
+                @TempData["ErrorMessage"]
+            </div>
+        </div>
+    </div>
+
+
+}
+
+<!-- Button trigger modal create Semester -->
+<button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#createGradeModal">
+    Create Grade
+</button>
+
+<!-- Modal Create Semester -->
+<div class="modal fade" id="createGradeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form asp-page="/Admin/GradePage/Grade" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create Semester</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Semester Name</p>
+                    <input type="text" name="gradeName" class="w-100" />
+                    <br />
+                    <p>Start Date</p>
+                    <input type="number" name="percent" class="w-100"
+                    <br />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- List table Grade -->
+<div>
+
+    <table class="table align-middle mb-0 bg-white">
+        <thead class="bg-light">
+            <tr>
+                <th>Grade Name</th>
+                <th>Percent</th>
+                <th>Delete</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (GradeDTO gDTO in Model.gradeDTOs)
+            {
+                <tr>
+                    <td>
+                        <p class="fw-normal mb-1">@gDTO.GradeName</p>
+                    </td>
+
+                    <td>
+                        <p class="fw-normal mb-1">@gDTO.Percent</p>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded"
+                            onclick="openPopupDelete('@gDTO.GradeID')">
+                            Delete
+                        </button>
+                    </td>
+
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded"
+                            onclick="openPopup('@gDTO.GradeName','@gDTO.Percent','@gDTO.GradeID')">
+                            Update
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

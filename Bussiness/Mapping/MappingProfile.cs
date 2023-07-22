@@ -11,6 +11,8 @@ namespace DemoNorthwindWithEF.Bussiness.Mapping
     {
         public MappingProfile() {
             CreateMap<Semester, SemesterDTO>().ReverseMap();
+            CreateMap<Class, ClassDTO>().ReverseMap();
+            CreateMap<Subject, SubjectDTO>().ReverseMap();
         }
 
     }

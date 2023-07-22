@@ -20,13 +20,13 @@
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                    <p>Tên Semester</p>
+                    <p>Semester Name</p>
                     <input type="text" name="semesterName"  class="w-100"/>
                     <br/>
-                    <p>Thời gian bắt đầu của Semester</p>
+                    <p>Start Date</p>
                     <input type="date" name="semesterStartDate" class="w-100" />
                     <br />
-                    <p>Thời gian kết thúc của Semester</p>
+                    <p>End Date</p>
                     <input type="date" name="semesterEndDate"  class="w-100"/>
             </div>
             <div class="modal-footer">
@@ -44,9 +44,9 @@
     <table class="table align-middle mb-0 bg-white">
         <thead class="bg-light">
         <tr>
-            <th>SemesterName</th>
+            <th>Semester Name</th>
             <th>Start Date</th>
-            <th>Endate</th>
+            <th>End Date</th>
             <th>Delete</th>
             <th>Edit</th>
         </tr>
@@ -99,11 +99,11 @@
                     <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" onclick="closePopup('updateSemesterModal')"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Tên Semester</p>
+                    <p>Semester Name</p>
                     <input id="updateSemesterName" type="text" name="semesterName" class="w-100" />
-                    <p>Thời gian bắt đầu của Semester</p>
+                    <p>Semester Start Date</p>
                     <input id="updateSemesterStartDate" type="date" name="semesterStartDate" class="w-100" />
-                    <p>Thời gian kết thúc của Semester</p>
+                    <p>Semester End Date</p>
                     <input id="updateSemesterEndDate" type="date" name="semesterEndDate" class="w-100" />
                     <input id="updateSemesterid" type="hidden" name="semesterId" />
                 </div>
@@ -128,11 +128,11 @@
                 </div>
                 <div class="modal-body">
                     <input id="deleteSemesterid" type="hidden" name="semesterId" />
-                    <p> Bạn có chắc chắn muốn xóa Semester này không ?</p>
+                    <p> Do you want Delete this Semester ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Delete</button>
                     <button type="button" class="btn btn-secondary" onclick="closePopup('deleteSemesterModal')">Cancle</button>
+                    <button type="submit" class="btn btn-primary">Delete</button>
                 </div>
             </div>
         </form>
@@ -162,14 +162,5 @@
         $('#deleteSemesterModal').modal('show');
     }
 
-    function formatDate(dateObject) {
-        const year = dateObject.getFullYear();
-        const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
-        const day = dateObject.getDate().toString().padStart(2, '0');
-        return `${year}-${month}-${day}`; 
-    }
-
-    function closePopup(modalID){
-        $('#' + modalID).modal('hide');
-    }
+  
 </script>
