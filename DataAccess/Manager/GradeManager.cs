@@ -56,7 +56,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
             {
                 Grade grade1 = GetById(grade.GradeID);
                 grade1.GradeName = grade.GradeName;
-                grade1.Percent = grade1.Percent;
+                grade1.Percent = grade.Percent;
                 _context.Grades.Update(grade1);
                 _context.SaveChanges();
                 if (_context.SaveChanges() > 0)

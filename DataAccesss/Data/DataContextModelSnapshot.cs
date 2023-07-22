@@ -3,19 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectPRN_FAP.DataAccess.Data;
 
 #nullable disable
 
-namespace ProjectPRN_FAP.DataAccess.Data
+namespace ProjectPRN_FAP.DataAccesss.Data
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230701074121_InitWebApp")]
-    partial class InitWebApp
+    partial class DataContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

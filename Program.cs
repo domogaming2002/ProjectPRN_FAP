@@ -12,6 +12,10 @@ builder.Services.AddScoped(typeof(ISemesterRepository), typeof(SemesterRepositor
 builder.Services.AddScoped(typeof(IClassRepository), typeof(ClassRepository));
 builder.Services.AddScoped(typeof(ISubjectRepository), typeof(SubjectRepository));
 builder.Services.AddScoped(typeof(IGradeRepository), typeof(GradeRepository));
+builder.Services.AddScoped(typeof(ISubjectGradeRepository), typeof(SubjectGradeRepository));
+builder.Services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+builder.Services.AddScoped(typeof(IStudentRepository), typeof(StudentRepository));
+builder.Services.AddScoped(typeof(ITeacherRepository), typeof(TeacherRepository));
 
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataConnectString")));
 

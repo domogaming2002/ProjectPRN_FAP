@@ -1,0 +1,53 @@
+﻿@page
+@using ProjectPRN_FAP.Bussiness.DTO
+@model ProjectPRN_FAP.Pages.Admin.SubjectPage.SubjectDetailModel
+@{
+    Layout = "_LayoutAdmin";
+}
+<h2>Grade of @Model.subject.SubjectName - @Model.subject.SubjectSubName </h2>
+
+<form asp-page-handler="AddGradeSubject">
+    <select id="category" name="gradeId" style="display: inline-block; vertical-align: middle;">
+        @foreach (GradeDTO g in Model.gradeDTOs)
+        {
+            <option value="@g.GradeID">@g.GradeName -  @g.Percent%</option>
+        }
+    </select>
+    <input type="hidden" value="@Model.subject.SubjectId" name="subjectId" />
+    <button type="submit" style="display: inline-block; vertical-align: middle;"> Add Grade</button>
+</form>
+
+<!-- List table Subject -->
+<div>
+    <table id="tablePagnation" class="table align-middle mb-0 bg-white">
+        <thead class="bg-light">
+            <tr>
+                <th>Grade Name</th>
+                <th>Percent</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (SubjectGradeDTO sg in Model.subjectGradeDTOs)
+            {
+                <tr>
+                    <td>
+                        <p class="fw-normal mb-1">@sg.Grade.GradeName</p>
+                    </td>
+
+                    <td>
+                        <p class="fw-normal mb-1">@sg.Grade.Percent</p>
+                    </td>
+
+
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded"
+                            onclick="openPopupDelete('@sg.SubjectId')">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

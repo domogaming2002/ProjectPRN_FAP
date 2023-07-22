@@ -14,6 +14,13 @@
     <script src="~/js/popper.min.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
     <script src="~/js/mdb.min.js"></script>
+
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- MDB DataTables plugin -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.2/datatables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.2/datatables.min.js"></script>
 </head>
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -69,7 +76,7 @@
                         </a>
 
                         <a asp-page="/Admin/ClassPage/Class" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                            <span class="fs-5 d-none d-sm-inline">Class</span>
+                            <span class="fs-5 d-none d-sm-inline">Class Name</span>
                         </a>
 
                         <a asp-page="/Admin/SubjectPage/Subject" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
@@ -77,9 +84,12 @@
                         </a>
 
                         <a asp-page="/Admin/GradePage/Grade" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                            <span class="fs-5 d-none d-sm-inline">Subject</span>
+                            <span class="fs-5 d-none d-sm-inline">Grade</span>
                         </a>
 
+                        <a asp-page="/Admin/UserPage/Student" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                            <span class="fs-5 d-none d-sm-inline">Student</span>
+                        </a>
                         <hr>
                         <div class="dropdown pb-4">
                             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -131,6 +141,8 @@
 </html>
 
 <script>
+ 
+
     function formatDate(dateObject) {
         const year = dateObject.getFullYear();
         const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');

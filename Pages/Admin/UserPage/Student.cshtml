@@ -1,0 +1,140 @@
+﻿@page
+@using ProjectPRN_FAP.Bussiness.DTO
+@model ProjectPRN_FAP.Pages.Admin.UserPage.StudentModel
+@{
+    Layout = "_LayoutAdmin";
+}
+<!-- Button trigger modal create Subject -->
+<button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#createStudentModel">
+    Create Student
+</button>
+
+<!-- Modal Create Subject -->
+<div class="modal fade" id="createStudentModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form asp-page-handler="createStudent">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create Student</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Email</p>
+                    <input type="text" name="studentEmail" class="w-100" />
+                    <br />
+
+                    <p>Student Code</p>
+                    <input type="text" name="studentCode" class="w-100" />
+                    <br />
+
+                    <p>Name</p>
+                    <input type="text" name="studentName" class="w-100" />
+                    <br />
+
+                    <p>Gender</p>
+                    <select name="studentGender">
+                        <option value="true">Nam</option>
+                        <option value="false">Nữ</option>
+                    </select>
+                    <br />
+
+                    <p>Phone</p>
+                    <input type="tel" name="studentPhone" class="w-100" />
+                    <br />
+
+                    <p>Password</p>
+                    <input type="text" name="studentPassword" class="w-100" />
+                    <br />
+
+                    <p>DateOfBirth</p>
+                    <input type="date" name="studentDob" class="w-100" />
+                    <br />
+
+                    <p>Campus</p>
+                    <input type="text" name="studentCampus" class="w-100" />
+                    <br />
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+
+    <table id="tablePagnation" class="table align-middle mb-0 bg-white">
+        <thead class="bg-light">
+            <tr>
+                <th>Student Code</th>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Phone</th>
+                <th>Password</th>
+                <th>DateOfBirth</th>
+                <th>Campus</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (StudentDTO sDTO in Model.studentDTOs)
+            {
+                <tr>
+                    <td>
+                        <p class="fw-normal mb-1">@sDTO.StudentCode</p>
+                    </td>
+
+                    <td>
+                        <p class="fw-normal mb-1">@sDTO.User.Email</p>
+                    </td>
+
+                    <td>
+                        <p class="fw-normal mb-1">@sDTO.User.Name</p>
+                    </td>
+
+                    <td>
+                        <p class="fw-normal mb-1">
+                            @(sDTO.User.Gender == true ? "Nam" : "Nữ")
+                        </p>
+                    </td>
+
+                    <td>
+                        <p class="fw-normal mb-1">@sDTO.User.Phone</p>
+                    </td>
+
+                    <td>
+                        <p class="fw-normal mb-1">@sDTO.User.Password</p>
+                    </td>
+
+                    <td>
+                        <p class="fw-normal mb-1">@sDTO.User.DateOfBirth.ToString("dd/MM/yyyy")</p>
+                    </td>
+
+                    <td>
+                        <p class="fw-normal mb-1">@sDTO.User.Campus</p>
+                    </td>
+
+
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded"
+                            onclick="openPopupDelete('@sDTO.UserId', '@sDTO.StudentId')">
+                            Delete
+                        </button>
+                    </td>
+
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded"
+                            @* onclick="openPopup('@sDTO.SubjectSubName','@sDTO.SubjectName','@sDTO.SubjectId')"*@>
+                            Update
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

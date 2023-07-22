@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace ProjectPRN_FAP.DataAccess.Data
+namespace ProjectPRN_FAP.DataAccesss.Data
 {
     public partial class InitWebApp : Migration
     {

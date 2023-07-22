@@ -1,28 +1,28 @@
-﻿using ProjectPRN_FAP.DataAccess.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjectPRN_FAP.DataAccess.Data;
 using ProjectPRN_FAP.Models;
-using ProjectPRN_FAP.DataAccess.Models;
 
 namespace ProjectPRN_FAP.DataAccess.Manager
 {
-    public class TeacherManager
+    public class StudentManager 
     {
         DataContext _context;
-        public TeacherManager(DataContext context)
+        public StudentManager(DataContext context)
         { _context = context; }
 
-        public List<Teacher>? GetList()
+        public List<Student>? GetList()
         {
-            return _context.Teachers.Where(t => t.IsDelete == false).ToList();
+            return _context.Students.Where(t => t.IsDelete == false).ToList();
         }
 
-        public Teacher? GetById(int teacherId)
+        public Student? GetById(int studentId)
         {
-            return _context.Teachers.FirstOrDefault(s => s.TeacherId == teacherId && s.IsDelete == false);
+            return _context.Students.FirstOrDefault(s => s.StudentId == studentId && s.IsDelete == false);
         }
 
-        public Boolean Create(Teacher teacher)
+        public Boolean Create(Student student)
         {
-            _context.Teachers.Add(teacher);
+            _context.Students.Add(student);
             _context.SaveChanges();
             if (_context.SaveChanges() > 0)
             {
@@ -31,13 +31,13 @@ namespace ProjectPRN_FAP.DataAccess.Manager
             return false;
         }
 
-        public Boolean Delelte(Teacher teacher)
+        public Boolean Delelte(Student student)
         {
             try
             {
-                Teacher teacherDelete = GetById(teacher.TeacherId);
-                teacherDelete.IsDelete = true;
-                _context.Teachers.Remove(teacherDelete);
+                Student studentDelete = GetById(student.StudentId);
+                studentDelete.IsDelete = true;
+                _context.Students.Remove(studentDelete);
                 _context.SaveChanges();
                 if (_context.SaveChanges() > 0)
                 {
@@ -51,13 +51,13 @@ namespace ProjectPRN_FAP.DataAccess.Manager
             }
         }
 
-        public Boolean Update(Teacher teacher)
+        public Boolean Update(Student student)
         {
             try
             {
-                Teacher teacherUpdate = GetById(teacher.TeacherId);
-                teacherUpdate.TeacherCode = teacher.TeacherCode;
-                _context.Teachers.Update(teacherUpdate);
+                Student studentUpdate = GetById(student.StudentId);
+                studentUpdate.StudentCode = student.StudentCode;
+                _context.Students.Update(studentUpdate);
                 _context.SaveChanges();
                 if (_context.SaveChanges() > 0)
                 {
@@ -70,7 +70,5 @@ namespace ProjectPRN_FAP.DataAccess.Manager
                 return false;
             }
         }
-
     }
 }
-

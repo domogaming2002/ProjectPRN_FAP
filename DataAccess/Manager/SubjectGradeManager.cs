@@ -1,4 +1,5 @@
-﻿using ProjectPRN_FAP.DataAccess.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjectPRN_FAP.DataAccess.Data;
 using ProjectPRN_FAP.DataAccess.Models;
 
 namespace ProjectPRN_FAP.DataAccess.Manager
@@ -16,7 +17,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
 
         public SubjectGrade? GetBySubjectId(int subjectId)
         {
-            return _context.SubjectGrades.FirstOrDefault(s => s.SubjectId == subjectId);
+            return _context.SubjectGrades.Include(s => s.Subject).Include(s => s.Grade).FirstOrDefault(s => s.SubjectId == subjectId && s.IsDelete == false);
         }
 
         public SubjectGrade? GetBySubjectGradeId(int subjectGradeId, int gradeId)
@@ -59,7 +60,8 @@ namespace ProjectPRN_FAP.DataAccess.Manager
         {
             try
             {
-                _context.SubjectGrades.Update(subjectGrade);
+                SubjectGrade subject = _context.SubjectGrades.FirstOrDefault(s => s.SubjectId == subjectGrade.SubjectId && s.GradeId == subjectGrade.GradeId);
+                _context.SubjectGrades.Update(subject);
                 _context.SaveChanges();
                 if (_context.SaveChanges() > 0)
                 {

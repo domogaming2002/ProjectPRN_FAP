@@ -16,7 +16,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
 
         public Subject? GetById(int subjectId)
         {
-            return _context.Subjects.FirstOrDefault(s => s.SubjectId == subjectId);
+            return _context.Subjects.FirstOrDefault(s => s.SubjectId == subjectId && s.IsDelete == false);
         }
 
         public Boolean Create(Subject subject)

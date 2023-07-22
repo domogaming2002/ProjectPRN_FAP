@@ -8,13 +8,13 @@ using System.Diagnostics;
 
 namespace ProjectPRN_FAP.Bussiness.Repository
 {
-    public class SubjectGradeRepositorycs : ISubjectGradeRepository
+    public class SubjectGradeRepository : ISubjectGradeRepository
     {
         SubjectGradeManager manager;
         DataContext _context;
         IMapper _mapper;
 
-        public SubjectGradeRepositorycs(DataContext context, IMapper mapper)
+        public SubjectGradeRepository(DataContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

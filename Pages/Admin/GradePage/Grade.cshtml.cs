@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProjectPRN_FAP.Bussiness.DTO;
 using ProjectPRN_FAP.Bussiness.IRepository;
+using ProjectPRN_FAP.DataAccess.Models;
 
 namespace ProjectPRN_FAP.Pages.Admin.GradePage
 {
@@ -28,36 +29,34 @@ namespace ProjectPRN_FAP.Pages.Admin.GradePage
 
         public void OnPost(String gradeName, int percent)
         {
-            if(percent == 0)
+            if(percent <= 0 || percent > 100)
             {
                 TempData["ErrorMessage"] = "Percent must be between 0 and 100.";
             }
-            //SemesterDTO semester = new SemesterDTO()
-            //{
-            //    SemesterName = semesterName,
-            //    StartDate = semesterStartDate,
-            //    EndDate = semesterEndDate,
-            //};
-            //_semesterRepository.Create(semester);
+            GradeDTO gradeDTO = new GradeDTO()
+            {
+                GradeName = gradeName,
+                Percent = percent,
+            };
+            _gradeRepository.Create(gradeDTO);
             GetData();
         }
 
-        public void OnPostUpdate(String semesterName, DateTime semesterStartDate, DateTime semesterEndDate, int semesterId)
+        public void OnPostUpdate(String gradeName, int percent, int gradeId)
         {
-            //SemesterDTO semester = _semesterRepository.GetById(semesterId);
-            //semester.SemesterName = semesterName;
-            //semester.StartDate = semesterStartDate;
-            //semester.EndDate = semesterEndDate;
-            //_semesterRepository.Update(semester);
-            //GetData();
+            GradeDTO gradeDTO = _gradeRepository.GetById(gradeId);
+            gradeDTO.GradeName = gradeName;
+            gradeDTO.Percent = percent;
+            _gradeRepository.Update(gradeDTO);
+            GetData();
 
         }
 
-        public void OnPostDelete(int semesterId)
+        public void OnPostDelete(int gradeId)
         {
-            //SemesterDTO semester = _semesterRepository.GetById(semesterId);
-            //_semesterRepository.Delete(semester);
-            //GetData();
+            GradeDTO gradeDTO = _gradeRepository.GetById(gradeId);
+            _gradeRepository.Delete(gradeDTO);
+            GetData();
 
         }
     }
