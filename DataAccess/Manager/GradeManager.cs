@@ -38,11 +38,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
                 grade1.IsDelete = true;
                 _context.Grades.Update(grade1);
                 _context.SaveChanges();
-                if (_context.SaveChanges() > 0)
-                {
                     return true;
-                }
-                return false;
             }
             catch (Exception e)
             {
@@ -59,11 +55,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
                 grade1.Percent = grade.Percent;
                 _context.Grades.Update(grade1);
                 _context.SaveChanges();
-                if (_context.SaveChanges() > 0)
-                {
                     return true;
-                }
-                return false;
             }
             catch (Exception e)
             {

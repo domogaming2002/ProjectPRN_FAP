@@ -25,8 +25,7 @@ namespace ProjectPRN_FAP.Bussiness.Repository
 
             if (GetUserById(userDTO.UserId) == null)
             {
-                manager.CreateUser(_mapper.Map<User>(userDTO));
-                return true;
+                return manager.CreateUser(_mapper.Map<User>(userDTO));
             }
             else
             {
@@ -36,7 +35,7 @@ namespace ProjectPRN_FAP.Bussiness.Repository
 
         public bool DelelteUser(UserDTO userDTO)
         {
-            if (GetUserById(userDTO.UserId) == null)
+            if (GetUserById(userDTO.UserId) != null)
             {
                 manager.DelelteUser(_mapper.Map<User>(userDTO));
                 return true;
@@ -45,6 +44,11 @@ namespace ProjectPRN_FAP.Bussiness.Repository
             {
                 return false;
             }
+        }
+
+        public int GetLastInsertUserId()
+        {
+            return manager.GetLastInsertUserId();
         }
 
         public List<UserDTO>? GetListUser()
@@ -59,7 +63,7 @@ namespace ProjectPRN_FAP.Bussiness.Repository
 
         public bool UpdateUser(UserDTO userDTO)
         {
-            if (GetUserById(userDTO.UserId) == null)
+            if (GetUserById(userDTO.UserId) != null)
             {
                 manager.UpdateUser(_mapper.Map<User>(userDTO));
                 return true;

@@ -12,7 +12,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
 
         public List<Student>? GetList()
         {
-            return _context.Students.Where(t => t.IsDelete == false).ToList();
+            return _context.Students.Include(s => s.User).Where(t => t.IsDelete == false).ToList();
         }
 
         public Student? GetById(int studentId)
@@ -39,11 +39,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
                 studentDelete.IsDelete = true;
                 _context.Students.Remove(studentDelete);
                 _context.SaveChanges();
-                if (_context.SaveChanges() > 0)
-                {
                     return true;
-                }
-                return false;
             }
             catch (Exception e)
             {
@@ -60,10 +56,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
                 _context.Students.Update(studentUpdate);
                 _context.SaveChanges();
                 if (_context.SaveChanges() > 0)
-                {
                     return true;
-                }
-                return false;
             }
             catch (Exception e)
             {

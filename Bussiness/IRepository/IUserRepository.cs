@@ -15,5 +15,7 @@ namespace ProjectPRN_FAP.Bussiness.IRepository
         Boolean DelelteUser(UserDTO userDTO);
 
         Boolean UpdateUser(UserDTO userDTO);
+
+        int GetLastInsertUserId();
     }
 }

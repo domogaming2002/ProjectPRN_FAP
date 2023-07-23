@@ -23,10 +23,10 @@ namespace ProjectPRN_FAP.DataAccess.Manager
 
         public Boolean CreateUser(User user)
         {
-            _context.Users.Add(user);
-            _context.SaveChanges();
-            if (_context.SaveChanges() > 0)
+            if(_context.Users.FirstOrDefault(u => u.Email == user.Email && u.IsDelete == false) == null)
             {
+                _context.Users.Add(user);
+                _context.SaveChanges();
                 return true;
             }
             return false;
@@ -40,11 +40,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
                 userDelete.IsDelete = true;
                 _context.Users.Remove(userDelete);
                 _context.SaveChanges();
-                if (_context.SaveChanges() > 0)
-                {
                     return true;
-                }
-                return false;
             }
             catch(Exception e)
             {
@@ -66,17 +62,20 @@ namespace ProjectPRN_FAP.DataAccess.Manager
                 userUpdate.Campus = user.Campus;
                 _context.Users.Update(userUpdate);
                 _context.SaveChanges();
-                if (_context.SaveChanges() > 0)
-                {
                     return true;
-                }
-                return false;
             }
             catch (Exception e)
             {
                 return false;
             }
         }
+
+        public int GetLastInsertUserId()
+        {
+            User? user = _context.Users.OrderBy(o => o.UserId).LastOrDefault();
+            return user != null ? user.UserId : 0;
+        }
+
 
     }
 }

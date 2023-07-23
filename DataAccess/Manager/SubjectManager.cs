@@ -38,11 +38,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
                 subject2.IsDelete = true;
                 _context.Subjects.Update(subject2);
                 _context.SaveChanges();
-                if (_context.SaveChanges() > 0)
-                {
                     return true;
-                }
-                return false;
             }
             catch (Exception e)
             {
@@ -59,11 +55,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
                 subject1.SubjectName = subject.SubjectName;
                 _context.Subjects.Update(subject1);
                 _context.SaveChanges();
-                if (_context.SaveChanges() > 0)
-                {
                     return true;
-                }
-                return false;
             }
             catch (Exception e)
             {

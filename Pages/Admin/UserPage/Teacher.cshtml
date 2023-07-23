@@ -1,57 +1,58 @@
 ﻿@page
 @using ProjectPRN_FAP.Bussiness.DTO
-@model ProjectPRN_FAP.Pages.Admin.UserPage.StudentModel
+@model ProjectPRN_FAP.Pages.Admin.UserPage.TeacherModel
 @{
     Layout = "_LayoutAdmin";
 }
+
 <!-- Button trigger modal create Subject -->
-<button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#createStudentModel">
-    Create Student
+<button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#createTeacherModel">
+    Create Teacher
 </button>
 
 <!-- Modal Create Subject -->
-<div class="modal fade" id="createStudentModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="createTeacherModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form asp-page-handler="createStudent">
+        <form asp-page-handler="createTeacher">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create Student</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Create Teacher</h5>
                     <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <p>Email</p>
-                    <input type="text" name="studentEmail" class="w-100" />
+                    <input type="text" name="teacherEmail" class="w-100" />
                     <br />
 
                     <p>Student Code</p>
-                    <input type="text" name="studentCode" class="w-100" />
+                    <input type="text" name="teacherCode" class="w-100" />
                     <br />
 
                     <p>Name</p>
-                    <input type="text" name="studentName" class="w-100" />
+                    <input type="text" name="teacherName" class="w-100" />
                     <br />
 
                     <p>Gender</p>
-                    <select name="studentGender" >
+                    <select name="teacherGender">
                         <option value="true">Nam</option>
                         <option value="false">Nữ</option>
                     </select>
                     <br />
 
                     <p>Phone</p>
-                    <input type="tel" name="studentPhone" class="w-100" />
+                    <input type="tel" name="teacherPhone" class="w-100" />
                     <br />
 
                     <p>Password</p>
-                    <input type="text" name="studentPassword" class="w-100" />
+                    <input type="text" name="teacherPassword" class="w-100" />
                     <br />
 
                     <p>DateOfBirth</p>
-                    <input type="date" name="studentDob" class="w-100" />
+                    <input type="date" name="teacherDob" class="w-100" />
                     <br />
 
                     <p>Campus</p>
-                    <input type="text" name="studentCampus" class="w-100" />
+                    <input type="text" name="teacherCampus" class="w-100" />
                     <br />
 
                 </div>
@@ -68,7 +69,7 @@
     <table id="tablePagnation" class="table align-middle mb-0 bg-white">
         <thead class="bg-light">
             <tr>
-                <th>Student Code</th>
+                <th>Teacher Code</th>
                 <th>Email</th>
                 <th>Name</th>
                 <th>Gender</th>
@@ -81,11 +82,11 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (StudentDTO sDTO in Model.studentDTOs)
+            @foreach (TeacherDTO sDTO in Model.teacherDTOs)
             {
                 <tr>
                     <td>
-                        <p class="fw-normal mb-1">@sDTO.StudentCode</p>
+                        <p class="fw-normal mb-1">@sDTO.TeacherCode</p>
                     </td>
 
                     <td>
@@ -121,7 +122,7 @@
 
                     <td>
                         <button type="button" class="btn btn-link btn-sm btn-rounded"
-                            onclick="openPopupDelete('@sDTO.UserId', '@sDTO.StudentId')">
+                            onclick="openPopupDelete('@sDTO.UserId', '@sDTO.TeacherId')">
                             Delete
                         </button>
                     </td>
@@ -129,7 +130,7 @@
                     <td>
                         @*openPopup(studentEmail,studentCode,studentName,studentGender,studentPhone, studentPassword, studentDob, studentCampus, studentId, userId)*@
                         <button type="button" class="btn btn-link btn-sm btn-rounded"
-                            onclick="openPopup('@sDTO.User.Email','@sDTO.StudentCode','@sDTO.User.Name','@sDTO.User.Gender','@sDTO.User.Phone','@sDTO.User.Password','@sDTO.User.DateOfBirth','@sDTO.User.Campus','@sDTO.StudentId','@sDTO.UserId')">
+                            onclick="openPopup('@sDTO.User.Email','@sDTO.TeacherCode','@sDTO.User.Name','@sDTO.User.Gender','@sDTO.User.Phone','@sDTO.User.Password','@sDTO.User.DateOfBirth','@sDTO.User.Campus','@sDTO.TeacherId','@sDTO.UserId')">
                             Update
                         </button>
                     </td>
@@ -140,56 +141,56 @@
 </div>
 
 <!-- Modal Update Subject -->
-<div class="modal fade" id="updateStudentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="updateTeacherModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form asp-page-handler="Update" method="post">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Update Semester</h5>
-                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" onclick="closePopup('updateStudentModal')"></button>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" onclick="closePopup('updateTeacherModal')"></button>
                 </div>
 
                 <div class="modal-body">
                     <p>Email</p>
-                    <input id="studentUpdateEmail" disabled type="text" name="studentEmail" class="w-100" />
+                    <input id="teacherUpdateEmail" disabled type="text" name="teachertEmail" class="w-100" />
                     <br />
 
                     <p>Student Code</p>
-                    <input id="studentUpdateCode" type="text" name="studentCode" class="w-100" />
+                    <input id="teacherUpdateCode" type="text" name="teacherCode" class="w-100" />
                     <br />
 
                     <p>Name</p>
-                    <input id="studentUpdateName" type="text" name="studentName" class="w-100" />
+                    <input id="teacherUpdateName" type="text" name="teacherName" class="w-100" />
                     <br />
 
                     <p>Gender</p>
-                    <select id="studentUpdateGender" name="studentGender">
+                    <select id="teacherUpdateGender" name="teacherGender">
                         <option value="true">Nam</option>
                         <option value="false">Nữ</option>
                     </select>
                     <br />
 
                     <p>Phone</p>
-                    <input id="studentUpdatePhone" type="tel" name="studentPhone" class="w-100" />
+                    <input id="teacherUpdatePhone" type="tel" name="teacherPhone" class="w-100" />
                     <br />
 
                     <p>Password</p>
-                    <input id="studentUpdatePassword" type="text" name="studentPassword" class="w-100" />
+                    <input id="teacherUpdatePassword" type="text" name="teacherPassword" class="w-100" />
                     <br />
 
                     <p>DateOfBirth</p>
-                    <input id="studentUpdateDob" type="date" name="studentDob" class="w-100" />
+                    <input id="teacherUpdateDob" type="date" name="teacherDob" class="w-100" />
                     <br />
 
                     <p>Campus</p>
-                    <input id="studentUpdateCampus" type="text" name="studentCampus" class="w-100" />
+                    <input id="teacherUpdateCampus" type="text" name="teacherCampus" class="w-100" />
                     <br />
-                    <input id="studentUpdateUserId" type="hidden" name="userId" class="w-100" />
-                    <input id="studentUpdateStudentId" type="hidden" name="studentId" class="w-100" />
+                    <input id="teacherUpdateUserId" type="hidden" name="userId" class="w-100" />
+                    <input id="teacherUpdateTeacherId" type="hidden" name="teacherId" class="w-100" />
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="closePopup('updateStudentModal')">Close</button>
+                    <button type="button" class="btn btn-secondary" onclick="closePopup('updateTeacherModal')">Close</button>
                     <button type="submit" class="btn btn-primary">Update</button>
                 </div>
             </div>
@@ -225,47 +226,47 @@
     $('#tablePagnation').DataTable({
         "pagingType": "full_numbers" // "simple" option for 'Previous' and 'Next' buttons only
     });
-    function openPopup(studentEmail, studentCode, studentName, studentGender, studentPhone, studentPassword, studentDob, studentCampus, studentId, userId) {
-        var inputMail = document.getElementById("studentUpdateEmail");
-        inputMail.value = studentEmail;
+    function openPopup(teacherEmail, teacherCode, teacherName, teacherGender, teacherPhone, teacherPassword, teacherDob, teacherCampus, teacherId, userId) {
+        var inputMail = document.getElementById("teacherUpdateEmail");
+        inputMail.value = teacherEmail;
 
 
-        var inputStudentCode = document.getElementById("studentUpdateCode");
-        inputStudentCode.value = studentCode;
+        var inputStudentCode = document.getElementById("teacherUpdateCode");
+        inputStudentCode.value = teacherCode;
 
-        var inputName = document.getElementById("studentUpdateName");
-        inputName.value = studentName;
+        var inputName = document.getElementById("teacherUpdateName");
+        inputName.value = teacherName;
 
 
-        var inputGender = document.getElementById("studentUpdateGender");
+        var inputGender = document.getElementById("teacherUpdateGender");
         for (var i = 0; i < inputGender.options.length; i++) {
-            if (inputGender.options[i].value.toUpperCase() == studentGender.toUpperCase()) {
-               
+            if (inputGender.options[i].value.toUpperCase() == teacherGender.toUpperCase()) {
+
                 inputGender.options[i].selected = true;
                 break;
             }
         }
 
-        var inputPhone = document.getElementById("studentUpdatePhone");
-        inputPhone.value = studentPhone;
+        var inputPhone = document.getElementById("teacherUpdatePhone");
+        inputPhone.value = teacherPhone;
 
-        var inputPassword = document.getElementById("studentUpdatePassword");
-        inputPassword.value = studentPassword;
+        var inputPassword = document.getElementById("teacherUpdatePassword");
+        inputPassword.value = teacherPassword;
 
-        var inputDob = document.getElementById("studentUpdateDob");
-        inputDob.value = formatDate(new Date(studentDob));
+        var inputDob = document.getElementById("teacherUpdateDob");
+        inputDob.value = formatDate(new Date(teacherDob));
 
 
-        var inputCampus = document.getElementById("studentUpdateCampus");
-        inputCampus.value = studentCampus;
+        var inputCampus = document.getElementById("teacherUpdateCampus");
+        inputCampus.value = teacherCampus;
 
-        var inputuserId = document.getElementById("studentUpdateUserId");
+        var inputuserId = document.getElementById("teacherUpdateUserId");
         inputuserId.value = userId;
 
-        var inputstudentId = document.getElementById("studentUpdateStudentId");
-        inputstudentId.value = studentId;
+        var inputstudentId = document.getElementById("teacherUpdateTeacherId");
+        inputstudentId.value = teacherId;
 
-        $('#updateStudentModal').modal('show');
+        $('#updateTeacherModal').modal('show');
     }
 
     function openPopupDelete(subjectId) {

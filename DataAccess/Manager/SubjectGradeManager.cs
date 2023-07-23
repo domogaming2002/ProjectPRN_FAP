@@ -44,11 +44,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
                 subject.IsDelete = true;
                 _context.SubjectGrades.Update(subject);
                 _context.SaveChanges();
-                if (_context.SaveChanges() > 0)
-                {
                     return true;
-                }
-                return false;
             }
             catch (Exception e)
             {
@@ -63,11 +59,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
                 SubjectGrade subject = _context.SubjectGrades.FirstOrDefault(s => s.SubjectId == subjectGrade.SubjectId && s.GradeId == subjectGrade.GradeId);
                 _context.SubjectGrades.Update(subject);
                 _context.SaveChanges();
-                if (_context.SaveChanges() > 0)
-                {
                     return true;
-                }
-                return false;
             }
             catch (Exception e)
             {

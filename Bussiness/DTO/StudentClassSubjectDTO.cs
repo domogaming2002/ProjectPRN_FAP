@@ -1,10 +1,9 @@
 ﻿using ProjectPRN_FAP.DataAccess.Models;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using ProjectPRN_FAP.Models;
 
-namespace ProjectPRN_FAP.Models
+namespace ProjectPRN_FAP.Bussiness.DTO
 {
-    public class StudentClassSubject
+    public class StudentClassSubjectDTO
     {
         public int StudentClassSubjectId { get; set; }
 

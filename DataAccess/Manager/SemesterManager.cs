@@ -40,10 +40,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
                 _context.Semesters.Update(semester1);
                 _context.SaveChanges();
                 if (_context.SaveChanges() > 0)
-                {
                     return true;
-                }
-                return false;
             }
             catch (Exception e)
             {
@@ -64,10 +61,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
                 _context.Semesters.Update(semester1);
                 _context.SaveChanges();
                 if (_context.SaveChanges() > 0)
-                {
                     return true;
-                }
-                return false;
             }
             catch (Exception e)
             {

@@ -34,7 +34,7 @@ namespace ProjectPRN_FAP.Bussiness.Repository
 
         public bool Delelte(StudentDTO studentDTO)
         {
-            if (GetById(studentDTO.StudentId) == null)
+            if (GetById(studentDTO.StudentId) != null)
             {
                 manager.Delelte(_mapper.Map<Student>(studentDTO));
                 return true;
@@ -57,7 +57,7 @@ namespace ProjectPRN_FAP.Bussiness.Repository
 
         public bool Update(StudentDTO studentDTO)
         {
-            if (GetById(studentDTO.StudentId) == null)
+            if (GetById(studentDTO.StudentId) != null)
             {
                 manager.Update(_mapper.Map<Student>(studentDTO));
                 return true;

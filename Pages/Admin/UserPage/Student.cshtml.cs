@@ -41,11 +41,42 @@ namespace ProjectPRN_FAP.Pages.Admin.UserPage
                 Password = studentPassword,
                 DateOfBirth = studentDob,
                 Campus = studentCampus,
-                RoleId = 1
+                RoleId = 3
             };
-            _userRepository.CreateUser(userDTO);
+            if (_userRepository.CreateUser(userDTO))
+            {
+                int userId = _userRepository.GetLastInsertUserId();
+                StudentDTO studentDTO = new StudentDTO()
+                {
+                    StudentCode = studentCode,
+                    UserId = userId
+                };
+                _studentRepository.Create(studentDTO);
+                GetData();
+                return;
+            }
+            GetData();
 
 
         }
+
+        public void OnPostUpdate(String studentEmail, String studentCode, String studentName, String studentGender, String studentPhone, String studentPassword, DateTime studentDob, String studentCampus, int userId, int studentId)
+        {
+            UserDTO userDTO = _userRepository.GetUserById(userId);
+            userDTO.Name = studentName;
+            userDTO.Gender = studentGender == "true" ? true : false;
+            userDTO.Phone = studentPhone;
+            userDTO.Password = studentPassword;
+            userDTO.DateOfBirth = studentDob;
+            userDTO.Campus = studentCampus;
+            _userRepository.UpdateUser(userDTO);
+            StudentDTO studentDTO = _studentRepository.GetById(studentId);
+            studentDTO.StudentCode = studentCode;
+            _studentRepository.Update(studentDTO);
+            GetData();
+
+
+        }
+
     }
 }

@@ -11,7 +11,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
 
         public List<ClassSubject>? GetList()
         {
-            return _context.ClassSubjects.ToList();
+            return _context.ClassSubjects.Where(c => c.IsDelete == false).ToList();
         }
 
         public ClassSubject? GetById(int classSubjectId)
@@ -20,7 +20,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
         }
         public List<ClassSubject>? GetListBySemester(int semesterId)
         {
-            return _context.ClassSubjects.Where(cs => cs.SemesterId == semesterId).ToList();
+            return _context.ClassSubjects.Where(cs => cs.SemesterId == semesterId && cs.IsDelete == false).ToList();
         }
 
         public Boolean Create(ClassSubject classSubject)
@@ -38,13 +38,11 @@ namespace ProjectPRN_FAP.DataAccess.Manager
         {
             try
             {
-                _context.ClassSubjects.Remove(classSubject);
+                ClassSubject cs = GetById(classSubject.ClassSubjectId);
+                cs.IsDelete = true;
+                _context.ClassSubjects.Update(cs);
                 _context.SaveChanges();
-                if (_context.SaveChanges() > 0)
-                {
                     return true;
-                }
-                return false;
             }
             catch (Exception e)
             {
@@ -56,13 +54,14 @@ namespace ProjectPRN_FAP.DataAccess.Manager
         {
             try
             {
-                _context.ClassSubjects.Update(classSubject);
+                ClassSubject cs = GetById(classSubject.ClassSubjectId);
+                cs.SubjectId = classSubject.SubjectId;
+                cs.SemesterId = classSubject.SemesterId;
+                cs.TeacherId = classSubject.TeacherId;
+                cs.ClassId = classSubject.ClassId;
+                _context.ClassSubjects.Update(cs);
                 _context.SaveChanges();
-                if (_context.SaveChanges() > 0)
-                {
                     return true;
-                }
-                return false;
             }
             catch (Exception e)
             {

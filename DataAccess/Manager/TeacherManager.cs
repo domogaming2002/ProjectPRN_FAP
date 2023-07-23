@@ -1,6 +1,7 @@
 ﻿using ProjectPRN_FAP.DataAccess.Data;
 using ProjectPRN_FAP.Models;
 using ProjectPRN_FAP.DataAccess.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProjectPRN_FAP.DataAccess.Manager
 {
@@ -12,7 +13,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
 
         public List<Teacher>? GetList()
         {
-            return _context.Teachers.Where(t => t.IsDelete == false).ToList();
+            return _context.Teachers.Include(s => s.User).Where(t => t.IsDelete == false).ToList();
         }
 
         public Teacher? GetById(int teacherId)
@@ -39,11 +40,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
                 teacherDelete.IsDelete = true;
                 _context.Teachers.Remove(teacherDelete);
                 _context.SaveChanges();
-                if (_context.SaveChanges() > 0)
-                {
                     return true;
-                }
-                return false;
             }
             catch (Exception e)
             {
@@ -59,11 +56,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
                 teacherUpdate.TeacherCode = teacher.TeacherCode;
                 _context.Teachers.Update(teacherUpdate);
                 _context.SaveChanges();
-                if (_context.SaveChanges() > 0)
-                {
                     return true;
-                }
-                return false;
             }
             catch (Exception e)
             {
