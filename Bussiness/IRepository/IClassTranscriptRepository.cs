@@ -5,5 +5,6 @@ namespace ProjectPRN_FAP.Bussiness.IRepository
     public interface IClassTranscriptRepository
     {
        List<ClassTranscriptDTO> GetList(int classSubjectId);
+       ClassTranscriptDTO GetOneStudentTranscript(int transcriptId);
     }
 }

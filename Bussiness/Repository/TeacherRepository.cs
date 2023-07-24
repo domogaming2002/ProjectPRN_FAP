@@ -52,6 +52,11 @@ namespace ProjectPRN_FAP.Bussiness.Repository
             return _mapper.Map<TeacherDTO>(manager.GetById(teacherId));
         }
 
+        public TeacherDTO? GetByUserId(int userId)
+        {
+            return _mapper.Map<TeacherDTO>(manager.GetByUserId(userId));
+        }
+
         public List<TeacherDTO>? GetList()
         {
             return _mapper.Map<List<TeacherDTO>>(manager.GetList());

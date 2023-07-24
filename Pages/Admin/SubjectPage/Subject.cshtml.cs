@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProjectPRN_FAP.Bussiness.DTO;
@@ -5,6 +6,7 @@ using ProjectPRN_FAP.Bussiness.IRepository;
 
 namespace ProjectPRN_FAP.Pages.Admin.SubjectPage
 {
+    [Authorize(Roles = "1")]
     public class SubjectModel : PageModel
     {
         ISubjectRepository _subjectRepository;

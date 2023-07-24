@@ -29,6 +29,11 @@ namespace ProjectPRN_FAP.DataAccess.Manager
             return _context.ClassSubjects.Where(cs => cs.SemesterId == semesterId && cs.IsDelete == false).ToList();
         }
 
+        public List<ClassSubject>? GetListByTeacher(int teacherId)
+        {
+            return _context.ClassSubjects.Include(cs => cs.Class).Include(cs => cs.Subject).Include(cs => cs.Teacher.User).Include(cs => cs.Teacher).Include(cs => cs.Semester).Where(cs => cs.TeacherId == teacherId && cs.IsDelete == false).ToList();
+        }
+
         public Boolean Create(ClassSubject classSubject)
         {
             

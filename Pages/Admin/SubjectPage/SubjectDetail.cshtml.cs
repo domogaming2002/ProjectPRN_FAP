@@ -1,11 +1,14 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProjectPRN_FAP.Bussiness.DTO;
 using ProjectPRN_FAP.Bussiness.IRepository;
 using ProjectPRN_FAP.DataAccess.Models;
+using System.Data;
 
 namespace ProjectPRN_FAP.Pages.Admin.SubjectPage
 {
+    [Authorize(Roles = "1")]
     public class SubjectDetailModel : PageModel
     {
         ISubjectRepository _subjectRepository;
@@ -35,7 +38,7 @@ namespace ProjectPRN_FAP.Pages.Admin.SubjectPage
                 return RedirectToPage("/Admin/SubjectPage/Subject");
             }
             gradeDTOs = _gradeRepository.GetList();
-            subjectGradeDTOs = _subjectGradeRepository.GetList();
+            subjectGradeDTOs = _subjectGradeRepository.GetBySubjectId(subjectId);
             return Page();
 
         }

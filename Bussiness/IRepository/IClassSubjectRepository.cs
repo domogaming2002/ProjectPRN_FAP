@@ -11,7 +11,7 @@ namespace ProjectPRN_FAP.Bussiness.IRepository
         ClassSubjectDTO? GetById(int classSubjectId);
         ClassSubjectDTO? GetByAllId(int classId, int subjectId, int teacherId, int semesterId);
         List<ClassSubjectDTO>? GetListBySemester(int semesterId);
-
+        List<ClassSubjectDTO>? GetListByTeacher(int teacherId);
         Boolean Create(ClassSubjectDTO classSubjectDTO);
 
         Boolean Delelte(ClassSubjectDTO classSubjectDTO);

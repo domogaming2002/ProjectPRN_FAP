@@ -1,11 +1,14 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProjectPRN_FAP.Bussiness.DTO;
 using ProjectPRN_FAP.Bussiness.IRepository;
 using ProjectPRN_FAP.DataAccess.Models;
+using System.Data;
 
 namespace ProjectPRN_FAP.Pages.Admin.GradePage
 {
+    [Authorize(Roles = "1")]
     public class GradeModel : PageModel
     {
         IGradeRepository _gradeRepository;

@@ -10,7 +10,8 @@ namespace ProjectPRN_FAP.Bussiness.IRepository
 
         TranscriptDTO? GetById(int transcriptId);
 
-        public List<TranscriptDTO>? GetByClassSubjectId(int classSubjectId);
+        List<TranscriptDTO>? GetByClassSubjectId(int classSubjectId);
+        List<TranscriptDTO>? GetByStudentId(int studentId);
 
         Boolean Create(TranscriptDTO transcript);
 

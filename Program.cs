@@ -52,7 +52,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthentication();
-
+app.UseStatusCodePagesWithReExecute("/Common/Login", "?statusCode={0}");
 app.UseAuthorization();
 
 app.MapRazorPages();

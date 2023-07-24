@@ -61,6 +61,19 @@ namespace ProjectPRN_FAP.Bussiness.Repository
             return _mapper.Map<UserDTO>(manager.GetUserById(userId));
         }
 
+        public UserDTO? GetUserLogin(LoginDTO loginDTO)
+        {
+            try
+            {
+                UserDTO u = _mapper.Map<UserDTO>(manager.GetUserLogin(loginDTO.Email, loginDTO.Password));
+                return u;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public bool UpdateUser(UserDTO userDTO)
         {
             if (GetUserById(userDTO.UserId) != null)

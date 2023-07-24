@@ -20,6 +20,11 @@ namespace ProjectPRN_FAP.DataAccess.Manager
             return _context.Students.FirstOrDefault(s => s.StudentId == studentId && s.IsDelete == false);
         }
 
+        public Student? GetByUserId(int userId)
+        {
+            return _context.Students.Include(s => s.User).FirstOrDefault(s => s.UserId == userId && s.IsDelete == false);
+        }
+
         public Boolean Create(Student student)
         {
             _context.Students.Add(student);

@@ -1,0 +1,45 @@
+﻿@page
+@using ProjectPRN_FAP.Bussiness.DTO
+@model ProjectPRN_FAP.Pages.Teacher.ClassPage.ViewScoreModel
+@{
+    Layout = "_LayoutTeacher";
+}
+
+<table id="tablePagnation" class="table align-middle mb-0 bg-white">
+    <thead class="bg-light">
+        <tr>
+            <th>Student Code</th>
+            <th>Student Name</th>
+            @foreach (SubjectGradeDTO sDTO in Model.subjectGradeDTOs)
+            {
+                <th>
+                    <p class="fw-normal mb-1">@sDTO.Grade.GradeName - @sDTO.Grade.Percent%</p>
+                </th>
+            }
+            <th>Total Scoore</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ClassTranscriptDTO cs in Model.classTranscriptDTOs)
+        {
+            <tr>
+                <td>@cs.TranscriptDTO.StudentId</td>
+                <td>@cs.TranscriptDTO.Students.User.Name</td>
+                @foreach (DetailScoreDTO ds in cs.DetailScoreDTOs)
+                {
+                    <td>
+                        <p class="fw-normal mb-1">@ds.Score</p>
+                    </td>
+                }
+                <td>@cs.TranscriptDTO.TotalScore</td>
+                <td>@cs.status</td>
+
+            </tr>
+
+        }
+    </tbody>
+</table>
+<form asp-page-handler="UpdateFinalScoore">
+    <button>Calculate Score</button>
+</form>

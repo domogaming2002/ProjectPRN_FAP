@@ -27,7 +27,7 @@
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" asp-page="/Admin/SemesterPage/Semester">Admin Site</a>
+        <a class="navbar-brand ps-3" asp-page="/Teacher/ClassPage/ListClass">Teacher Site</a>
     </nav>
     <div id="layoutSidenav">
         <!-- Sidebar -->
@@ -35,42 +35,21 @@
             <div class="row flex-nowrap">
                 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                        
-                        <a asp-page="/Admin/SemesterPage/Semester" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                            <span class="fs-5 d-none d-sm-inline">Semester</span>
+
+                    
+
+                        <a asp-page="/Teacher/ClassPage/ListClass" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                            <span class="fs-5 d-none d-sm-inline">View Class</span>
                         </a>
 
-                        <a asp-page="/Admin/ClassPage/Class" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                            <span class="fs-5 d-none d-sm-inline">Class Name</span>
-                        </a>
-
-                        <a asp-page="/Admin/ClassPage/ClassSubject" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                            <span class="fs-5 d-none d-sm-inline">Class + Subject</span>
-                        </a>
-
-                        <a asp-page="/Admin/SubjectPage/Subject" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                            <span class="fs-5 d-none d-sm-inline">Subject</span>
-                        </a>
-
-                        <a asp-page="/Admin/GradePage/Grade" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                            <span class="fs-5 d-none d-sm-inline">Grade</span>
-                        </a>
-
-                        <a asp-page="/Admin/UserPage/Student" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                            <span class="fs-5 d-none d-sm-inline">Student</span>
-                        </a>
-
-                         <a asp-page="/Admin/UserPage/Teacher" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                            <span class="fs-5 d-none d-sm-inline">Teacher</span>
-                        </a>
                         <hr>
                         <div class="dropdown pb-4">
                             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                                
+
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                                <li><a asp-page ="/Common/Logout" class="dropdown-item">Sign out</a></li>
+                                <li><a asp-page="/Common/Logout" class="dropdown-item">Sign out</a></li>
                             </ul>
                         </div>
                     </div>
@@ -108,7 +87,7 @@
 </html>
 
 <script>
- 
+
 
     function formatDate(dateObject) {
         const year = dateObject.getFullYear();

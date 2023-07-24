@@ -1,0 +1,47 @@
+﻿@page
+@using ProjectPRN_FAP.Bussiness.DTO
+@model ProjectPRN_FAP.Pages.Teacher.ClassPage.ListClassModel
+@{
+    Layout = "_LayoutTeacher";
+}
+<div>
+    <table id="tablePagnation" class="table align-middle mb-0 bg-white">
+        <thead class="bg-light">
+            <tr>
+                <th>Class</th>
+                <th>Subject</th>
+                <th>Semester</th>
+                <th>Update Score</th>
+                <th>View Scoore</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ClassSubjectDTO cs in Model.classSubjectDTOs)
+            {
+                <tr>
+                    <td>
+                        <p class="fw-normal mb-1">@cs.Class.ClassName</p>
+                    </td>
+
+                    <td>
+                        <p class="fw-normal mb-1">@cs.Subject.SubjectName - @cs.Subject.SubjectSubName</p>
+                    </td>
+
+                    <td>
+                        <p class="fw-normal mb-1">@cs.Semester.SemesterName</p>
+                    </td>
+
+                    <td>
+                        <a asp-page="/Teacher/ClassPage/UpdateScore" asp-route-classSubjectId="@cs.ClassSubjectId" asp-route-subjectId="@cs.SubjectId">Update scoore</a>
+                    </td>
+
+                    <td>
+                        <a asp-page="/Teacher/ClassPage/ViewScore" asp-route-classSubjectId="@cs.ClassSubjectId" asp-route-subjectId="@cs.SubjectId">View Score </a>
+                    </td>
+
+          
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

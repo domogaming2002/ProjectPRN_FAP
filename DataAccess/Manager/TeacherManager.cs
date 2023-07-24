@@ -21,6 +21,11 @@ namespace ProjectPRN_FAP.DataAccess.Manager
             return _context.Teachers.FirstOrDefault(s => s.TeacherId == teacherId && s.IsDelete == false);
         }
 
+        public Teacher? GetByUserId(int userId)
+        {
+            return _context.Teachers.Include(s => s.User).FirstOrDefault(s => s.UserId == userId && s.IsDelete == false);
+        }
+
         public Boolean Create(Teacher teacher)
         {
             _context.Teachers.Add(teacher);
@@ -40,7 +45,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
                 teacherDelete.IsDelete = true;
                 _context.Teachers.Remove(teacherDelete);
                 _context.SaveChanges();
-                    return true;
+                return true;
             }
             catch (Exception e)
             {
@@ -56,7 +61,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
                 teacherUpdate.TeacherCode = teacher.TeacherCode;
                 _context.Teachers.Update(teacherUpdate);
                 _context.SaveChanges();
-                    return true;
+                return true;
             }
             catch (Exception e)
             {

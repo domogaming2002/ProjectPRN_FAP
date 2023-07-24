@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProjectPRN_FAP.Bussiness.DTO;
 using ProjectPRN_FAP.Bussiness.IRepository;
 namespace ProjectPRN_FAP.Pages.Admin
 {
+    [Authorize(Roles = "1")]
     public class SemesterModel : PageModel
     {
 

@@ -6,13 +6,15 @@ namespace ProjectPRN_FAP.Bussiness.IRepository
 {
     public interface IStudentRepository
     {
-        public List<StudentDTO>? GetList();
-        public StudentDTO? GetById(int studentId);
+         List<StudentDTO>? GetList();
+         StudentDTO? GetById(int studentId);
 
-        public Boolean Create(StudentDTO studentDTO);
+        StudentDTO? GetByUserId(int userId);
 
-        public Boolean Delelte(StudentDTO studentDTO);
+         Boolean Create(StudentDTO studentDTO);
 
-        public Boolean Update(StudentDTO studentDTO);
+         Boolean Delelte(StudentDTO studentDTO);
+
+         Boolean Update(StudentDTO studentDTO);
     }
 }

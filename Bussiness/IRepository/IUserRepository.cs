@@ -8,6 +8,8 @@ namespace ProjectPRN_FAP.Bussiness.IRepository
     {
         List<UserDTO>? GetListUser();
 
+        UserDTO? GetUserLogin(LoginDTO loginDTO);
+
         UserDTO? GetUserById(int userId);
 
         Boolean CreateUser(UserDTO userDTO);

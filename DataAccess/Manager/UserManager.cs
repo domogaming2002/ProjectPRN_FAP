@@ -21,6 +21,11 @@ namespace ProjectPRN_FAP.DataAccess.Manager
             return _context.Users.FirstOrDefault(u => u.UserId == userId && u.IsDelete == false);
         }
 
+        public User? GetUserLogin(string userEmail, string password)
+        {
+            return _context.Users.FirstOrDefault(u => u.Email.Trim() == userEmail.Trim() && u.Password.Trim() == password.Trim() && u.IsDelete == false);
+        }
+
         public Boolean CreateUser(User user)
         {
             if(_context.Users.FirstOrDefault(u => u.Email == user.Email && u.IsDelete == false) == null)

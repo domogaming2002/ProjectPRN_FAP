@@ -1,4 +1,5 @@
-﻿using ProjectPRN_FAP.DataAccess.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjectPRN_FAP.DataAccess.Data;
 using ProjectPRN_FAP.DataAccess.Models;
 using ProjectPRN_FAP.Models;
 
@@ -22,7 +23,15 @@ namespace ProjectPRN_FAP.DataAccess.Manager
 
         public List<Transcript>? GetByClassSubjectId(int classSubjectId)
         {
-            return _context.Transcripts.Where(s => s.ClassSubjectId == classSubjectId && s.IsDelete == false).ToList();
+            return _context.Transcripts.Include(t => t.Students).Include(t => t.Students.User).Where(s => s.ClassSubjectId == classSubjectId && s.IsDelete == false).ToList();
+
+        }
+        public List<Transcript>? GetByStudentId(int studentId)
+        {
+            return _context.Transcripts.Include(t => t.Students).Include(t => t.Students.User)
+                .Include(t => t.ClassSubject).Include(t => t.ClassSubject.Class)
+                .Include(t => t.Subject).Include(t => t.ClassSubject.Semester)
+                .Where(s => s.StudentId == studentId && s.IsDelete == false).ToList();
         }
 
         public Boolean Create(Transcript transcript)

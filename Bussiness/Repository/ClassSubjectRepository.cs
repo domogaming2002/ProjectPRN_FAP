@@ -64,6 +64,11 @@ namespace ProjectPRN_FAP.Bussiness.Repository
             return _mapper.Map<List<ClassSubjectDTO>>(manager.GetListBySemester(semesterId)); 
         }
 
+        public List<ClassSubjectDTO>? GetListByTeacher(int teacherId)
+        {
+            return _mapper.Map<List<ClassSubjectDTO>>(manager.GetListByTeacher(teacherId));
+        }
+
         public bool Update(ClassSubjectDTO classSubjectDTO)
         {
             if (GetById(classSubjectDTO.ClassSubjectId) != null)
