@@ -1,4 +1,5 @@
-﻿using ProjectPRN_FAP.DataAccess.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjectPRN_FAP.DataAccess.Data;
 using ProjectPRN_FAP.DataAccess.Models;
 
 namespace ProjectPRN_FAP.DataAccess.Manager
@@ -11,12 +12,17 @@ namespace ProjectPRN_FAP.DataAccess.Manager
 
         public List<ClassSubject>? GetList()
         {
-            return _context.ClassSubjects.Where(c => c.IsDelete == false).ToList();
+            return _context.ClassSubjects.Include(cs => cs.Class).Include(cs => cs.Subject).Include(cs => cs.Teacher.User).Include(cs => cs.Teacher).Include(cs => cs.Semester).Where(c => c.IsDelete == false).ToList();
         }
 
         public ClassSubject? GetById(int classSubjectId)
         {
-            return _context.ClassSubjects.FirstOrDefault(s => s.ClassSubjectId == classSubjectId);
+            return _context.ClassSubjects.Include(cs => cs.Class).Include(cs => cs.Subject).Include(cs => cs.Teacher.User).Include(cs => cs.Teacher).Include(cs => cs.Semester).FirstOrDefault(s => s.ClassSubjectId == classSubjectId);
+        }
+
+        public ClassSubject? GetByAllId(int classId, int subjectId,int teacherId, int semesterId)
+        {
+            return _context.ClassSubjects.FirstOrDefault(s =>  s.ClassId == classId && s.SubjectId == subjectId && s.TeacherId == teacherId && s.SemesterId == semesterId);
         }
         public List<ClassSubject>? GetListBySemester(int semesterId)
         {
@@ -25,6 +31,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
 
         public Boolean Create(ClassSubject classSubject)
         {
+            
             _context.ClassSubjects.Add(classSubject);
             _context.SaveChanges();
             if (_context.SaveChanges() > 0)

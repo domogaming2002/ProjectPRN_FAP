@@ -22,7 +22,7 @@ namespace ProjectPRN_FAP.Bussiness.Repository
 
         public bool Create(ClassSubjectDTO classSubjectDTO)
         {
-            if (GetById(classSubjectDTO.ClassSubjectId) == null)
+            if (GetByAllId(classSubjectDTO.ClassId, classSubjectDTO.SubjectId, classSubjectDTO.TeacherId, classSubjectDTO.SemesterId) == null)
             {
                 return manager.Create(_mapper.Map<ClassSubject>(classSubjectDTO)); ;
             }
@@ -44,6 +44,11 @@ namespace ProjectPRN_FAP.Bussiness.Repository
             }
         }
 
+        public ClassSubjectDTO? GetByAllId( int classId, int subjectId, int teacherId, int semesterId)
+        {
+            return _mapper.Map<ClassSubjectDTO>(manager.GetByAllId( classId, subjectId, teacherId, semesterId));
+        }
+
         public ClassSubjectDTO? GetById(int classSubjectId)
         {
             return _mapper.Map<ClassSubjectDTO>(manager.GetById(classSubjectId));
@@ -51,12 +56,12 @@ namespace ProjectPRN_FAP.Bussiness.Repository
 
         public List<ClassSubjectDTO>? GetList()
         {
-            return _mapper.Map<List<ClassSubjectDTO>>(manager.GetList()); ;
+            return _mapper.Map<List<ClassSubjectDTO>>(manager.GetList()); 
         }
 
         public List<ClassSubjectDTO>? GetListBySemester(int semesterId)
         {
-            return _mapper.Map<List<ClassSubjectDTO>>(manager.GetListBySemester(semesterId)); ;
+            return _mapper.Map<List<ClassSubjectDTO>>(manager.GetListBySemester(semesterId)); 
         }
 
         public bool Update(ClassSubjectDTO classSubjectDTO)

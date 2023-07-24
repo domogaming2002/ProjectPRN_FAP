@@ -39,7 +39,6 @@ namespace ProjectPRN_FAP.DataAccess.Manager
                 semester1.IsDelete = true;
                 _context.Semesters.Update(semester1);
                 _context.SaveChanges();
-                if (_context.SaveChanges() > 0)
                     return true;
             }
             catch (Exception e)
@@ -60,7 +59,6 @@ namespace ProjectPRN_FAP.DataAccess.Manager
 
                 _context.Semesters.Update(semester1);
                 _context.SaveChanges();
-                if (_context.SaveChanges() > 0)
                     return true;
             }
             catch (Exception e)

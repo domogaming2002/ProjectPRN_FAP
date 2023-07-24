@@ -15,9 +15,9 @@ namespace ProjectPRN_FAP.DataAccess.Manager
             return _context.SubjectGrades.ToList();
         }
 
-        public SubjectGrade? GetBySubjectId(int subjectId)
+        public List<SubjectGrade>? GetBySubjectId(int subjectId)
         {
-            return _context.SubjectGrades.Include(s => s.Subject).Include(s => s.Grade).FirstOrDefault(s => s.SubjectId == subjectId && s.IsDelete == false);
+            return _context.SubjectGrades.Include(s => s.Subject).Include(s => s.Grade).Where(s => s.SubjectId == subjectId && s.IsDelete == false).ToList();
         }
 
         public SubjectGrade? GetBySubjectGradeId(int subjectGradeId, int gradeId)

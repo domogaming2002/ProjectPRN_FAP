@@ -50,9 +50,9 @@ namespace ProjectPRN_FAP.Bussiness.Repository
             }
         }
 
-        public SubjectGradeDTO GetBySubjectId(int subjectId)
+        public List<SubjectGradeDTO>? GetBySubjectId(int subjectId)
         {
-            return _mapper.Map<SubjectGradeDTO>(manager.GetBySubjectId(subjectId));
+            return _mapper.Map<List<SubjectGradeDTO>>(manager.GetBySubjectId(subjectId));
         }
 
         public SubjectGradeDTO GetBySubjectIdGradeId(int subjectId, int gradeId)

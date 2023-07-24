@@ -21,6 +21,8 @@ namespace DemoNorthwindWithEF.Bussiness.Mapping
             CreateMap<Teacher, TeacherDTO>().ReverseMap();
             CreateMap<ClassSubject, ClassSubjectDTO>().ReverseMap();
             CreateMap<StudentClassSubject, StudentClassSubjectDTO>().ReverseMap();
+            CreateMap<Transcript, TranscriptDTO>().ReverseMap();
+            CreateMap<DetailScore, DetailScoreDTO>().ReverseMap();
         }
 
     }

@@ -55,7 +55,6 @@ namespace ProjectPRN_FAP.DataAccess.Manager
                 studentUpdate.StudentCode = student.StudentCode;
                 _context.Students.Update(studentUpdate);
                 _context.SaveChanges();
-                if (_context.SaveChanges() > 0)
                     return true;
             }
             catch (Exception e)

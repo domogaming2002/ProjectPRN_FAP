@@ -1,4 +1,5 @@
 using DemoNorthwindWithEF.Bussiness.Mapping;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using ProjectPRN_FAP.Bussiness.IRepository;
 using ProjectPRN_FAP.Bussiness.Repository;
@@ -18,6 +19,10 @@ builder.Services.AddScoped(typeof(IStudentRepository), typeof(StudentRepository)
 builder.Services.AddScoped(typeof(ITeacherRepository), typeof(TeacherRepository));
 builder.Services.AddScoped(typeof(IClassSubjectRepository), typeof(ClassSubjectRepository));
 builder.Services.AddScoped(typeof(IStudentClassSubjectRepository), typeof(StudentClassSubjectRepository));
+builder.Services.AddScoped(typeof(ITranscriptRepository), typeof(TranscriptRepository));
+builder.Services.AddScoped(typeof(IDetailScoreRepository), typeof(DetailScoreRepository));
+builder.Services.AddScoped(typeof(IClassGradeRepository), typeof(ClassGradeRepository));
+builder.Services.AddScoped(typeof(IClassTranscriptRepository), typeof(ClassTranscriptRepository));
 
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataConnectString")));
 
@@ -27,6 +32,13 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<DataContext>
     (options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataConnectString")));
 
+builder.Services.AddAuthentication(
+    CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(option =>
+    {
+        option.LoginPath = "/Common/Login";
+        option.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+    });
 
 var app = builder.Build();
 
@@ -38,6 +50,8 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

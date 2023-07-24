@@ -24,7 +24,8 @@ namespace ProjectPRN_FAP.Bussiness.Repository
 
         public bool Create(StudentClassSubjectDTO studentClassSubject)
         {
-            if (GetById(studentClassSubject.StudentClassSubjectId) == null)
+            StudentClassSubjectDTO s = GetByStudentIdClassSubjectId(studentClassSubject.StudentId, studentClassSubject.ClasSubjectId);
+            if (s == null)
             {
                 return manager.Create(_mapper.Map<StudentClassSubject>(studentClassSubject)); ;
             }

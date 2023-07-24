@@ -6,7 +6,7 @@ namespace ProjectPRN_FAP.Bussiness.IRepository
     {
         List<SubjectGradeDTO> GetList();
 
-        SubjectGradeDTO GetBySubjectId(int subjectId);
+        List<SubjectGradeDTO> GetBySubjectId(int subjectId);
         SubjectGradeDTO GetBySubjectIdGradeId(int subjectId, int gradeId);
         bool Create(SubjectGradeDTO subjectGradeDTO);
         bool Update(SubjectGradeDTO subjectGradeDTO);

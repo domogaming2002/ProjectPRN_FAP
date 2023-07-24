@@ -6,15 +6,16 @@ namespace ProjectPRN_FAP.Bussiness.IRepository
 {
     public interface IClassSubjectRepository
     {
-         List<ClassSubjectDTO>? GetList();
+        List<ClassSubjectDTO> GetList();
 
         ClassSubjectDTO? GetById(int classSubjectId);
-         List<ClassSubjectDTO>? GetListBySemester(int semesterId);
+        ClassSubjectDTO? GetByAllId(int classId, int subjectId, int teacherId, int semesterId);
+        List<ClassSubjectDTO>? GetListBySemester(int semesterId);
 
-         Boolean Create(ClassSubjectDTO classSubjectDTO);
+        Boolean Create(ClassSubjectDTO classSubjectDTO);
 
-         Boolean Delelte(ClassSubjectDTO classSubjectDTO);
+        Boolean Delelte(ClassSubjectDTO classSubjectDTO);
 
-         Boolean Update(ClassSubjectDTO classSubjectDTO);
+        Boolean Update(ClassSubjectDTO classSubjectDTO);
     }
 }

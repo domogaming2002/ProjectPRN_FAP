@@ -1,4 +1,6 @@
-﻿using ProjectPRN_FAP.DataAccess.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjectPRN_FAP.Bussiness.DTO;
+using ProjectPRN_FAP.DataAccess.Data;
 using ProjectPRN_FAP.DataAccess.Models;
 using ProjectPRN_FAP.Models;
 
@@ -12,37 +14,42 @@ namespace ProjectPRN_FAP.DataAccess.Manager
 
         public List<StudentClassSubject>? GetList()
         {
-            return _context.StudentClassSubjects.Where(c => c.IsDelete == false).ToList();
+            return _context.StudentClassSubjects.Include(c => c.Student).Include(c => c.Student.User).Where(c => c.IsDelete == false).ToList();
         }
 
         public StudentClassSubject? GetById(int studentClassSubjectId)
         {
-            return _context.StudentClassSubjects.FirstOrDefault(s => s.StudentClassSubjectId == studentClassSubjectId);
+            return _context.StudentClassSubjects.Include(c => c.Student).Include(c => c.Student.User).FirstOrDefault(s => s.StudentClassSubjectId == studentClassSubjectId);
         }
 
         public StudentClassSubject? GetByStudentIdClassSubjectId(int studentId, int classSubjectId)
         {
-            return _context.StudentClassSubjects.FirstOrDefault(s => s.StudentId == studentId && s.ClasSubjectId == classSubjectId);
+            return _context.StudentClassSubjects.Include(c => c.Student).Include(c => c.Student.User).FirstOrDefault(s => s.StudentId == studentId && s.ClasSubjectId == classSubjectId);
         }
         public List<StudentClassSubject>? GetListByStudentId(int studentId)
         {
-            return _context.StudentClassSubjects.Where(s => s.StudentId == studentId && s.IsDelete == false).ToList();
+            return _context.StudentClassSubjects.Include(c => c.Student).Include(c => c.Student.User).Where(s => s.StudentId == studentId && s.IsDelete == false).ToList();
         }
 
         public List<StudentClassSubject>? GetListByClassSubjectId(int classSubjectId)
         {
-            return _context.StudentClassSubjects.Where(s=> s.ClasSubjectId == classSubjectId && s.IsDelete == false).ToList();
+            return _context.StudentClassSubjects.Include(c => c.Student).Include(c => c.Student.User).Where(s => s.ClasSubjectId == classSubjectId && s.IsDelete == false).ToList();
         }
 
         public Boolean Create(StudentClassSubject studentClassSubject)
         {
-            _context.StudentClassSubjects.Add(studentClassSubject);
-            _context.SaveChanges();
-            if (_context.SaveChanges() > 0)
+            if (GetByStudentIdClassSubjectId(studentClassSubject.StudentId, studentClassSubject.ClasSubjectId) == null)
             {
+
+                _context.StudentClassSubjects.Add(studentClassSubject);
+                _context.SaveChanges();
                 return true;
             }
-            return false;
+            else
+            {
+                return false;
+            }
+
         }
 
         public Boolean Delelte(StudentClassSubject studentClassSubject)
@@ -72,8 +79,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
                 //cs.ClassId = classSubject.ClassId;
                 _context.StudentClassSubjects.Update(cs);
                 _context.SaveChanges();
-                if (_context.SaveChanges() > 0)
-                    return true;
+                return true;
             }
             catch (Exception e)
             {

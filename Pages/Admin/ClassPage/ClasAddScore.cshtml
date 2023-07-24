@@ -1,0 +1,99 @@
+﻿@page
+@using ProjectPRN_FAP.Bussiness.DTO
+@using ProjectPRN_FAP.Models
+@model ProjectPRN_FAP.Pages.Admin.ClassPage.ClasAddScoreModel
+@{
+    Layout = "_LayoutAdmin";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="table-wrapper">
+                <h1>List Student</h1>
+                <table id="tablePagnation" class="table align-middle mb-0 bg-white">
+                    <thead class="bg-light">
+                        <tr>
+                            <th>Grade Name</th>
+                            <th>Percent</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (SubjectGradeDTO sDTO in Model.subjectGradeDTOs)
+                        {
+                            <tr>
+                                <td>
+                                    <p class="fw-normal mb-1">@sDTO.Grade.GradeName</p>
+                                </td>
+
+                                <td>
+                                    <p class="fw-normal mb-1">@sDTO.Grade.Percent</p>
+                                </td>
+
+                                <td>
+                                    <form method="get" asp-page-handler="ViewDetailGradeScoore">
+                                        <input type="hidden" name="classSubjectId" value="@Model.classSubjectDTO.ClassSubjectId" />
+                                        <input type="hidden" name="subjectId" value="@Model.classSubjectDTO.SubjectId" />
+                                        <input type="hidden" name="gradeId" value="@sDTO.GradeId" />
+                                        <button type="submit" class="btn btn-link btn-sm btn-rounded">
+                                            Add
+                                        </button>
+                                    </form>
+
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="table-wrapper">
+                @if (Model.classGradeDTO != null)
+                {
+                    <h1>Grade @Model.classGradeDTO.Grade.GradeName -@Model.classGradeDTO.Grade.Percent </h1>
+                    <form method="post" id="myForm">
+                        <input type="hidden" name="classSubjectId" value="@Model.classSubjectDTO.ClassSubjectId" />
+                        <input type="hidden" name="subjectId" value="@Model.classSubjectDTO.SubjectId" />
+                        <input type="hidden" name="gradeId" value="@Model.GradeId" />
+                        <table id="tablePagnation1" class="table align-middle mb-0 bg-white">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th>Student Code</th>
+                                    <th>Student Name</th>
+                                    <th>Scoore</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.classGradeDTO.Student.Count; i++)
+                                {
+                                    <input name="classGradeDTO.DetailScores[@i].DetailScoreId" value="@Model.classGradeDTO.DetailScores[i].DetailScoreId" type="hidden">
+                                    <tr>
+                                        <td>
+                                            <p class="fw-normal mb-1">@Model.classGradeDTO.Student[i].Student.StudentCode</p>
+                                        </td>
+
+
+                                   
+
+                                        <td>
+                                            <p class="fw-normal mb-1">@Model.classGradeDTO.Student[i].Student.User.Name</p>
+                                        </td>
+                                        <td>
+                                            <input type="number" step="0.01" min="0" max="10" class="form-control mark-input" name="classGradeDTO.DetailScores[@i].Score" placeholder="Value" value="@Model.classGradeDTO.DetailScores[i].Score" required>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <button type="submit" class="btn btn-primary" id="submitButton">Save</button>
+                    </form>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,7 +4,7 @@ namespace ProjectPRN_FAP.Bussiness.IRepository
 {
     public interface ITeacherRepository
     {
-        public List<TeacherDTO>? GetList();
+        public List<TeacherDTO> GetList();
         public TeacherDTO? GetById(int teacherId);
 
         public Boolean Create(TeacherDTO teacherDTO);
