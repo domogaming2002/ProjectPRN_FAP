@@ -47,7 +47,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
             {
                 DetailScore t = GetById(detailScore.DetailScoreId);
                 t.IsDelete = true;
-                _context.DetailScores.Remove(t);
+                _context.DetailScores.Update(t);
                 _context.SaveChanges();
                 return true;
             }

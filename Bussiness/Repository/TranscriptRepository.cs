@@ -44,6 +44,11 @@ namespace ProjectPRN_FAP.Bussiness.Repository
             }
         }
 
+        public TranscriptDTO? GetByAllId(int classSubjectId, int studentId, int subjectId)
+        {
+            return _mapper.Map<TranscriptDTO>(manager.GetByAllId(classSubjectId, studentId, subjectId));
+        }
+
         public List<TranscriptDTO>? GetByClassSubjectId(int classSubjectId)
         {
             return _mapper.Map<List<TranscriptDTO>>(manager.GetByClassSubjectId(classSubjectId));

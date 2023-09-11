@@ -32,14 +32,26 @@
                         <p class="fw-normal mb-1">@ds.Score</p>
                     </td>
                 }
-                <td>@cs.TranscriptDTO.TotalScore</td>
-                <td>@cs.status</td>
-
+                <td>@cs.TranscriptDTO.TotalScore.ToString("0.00")</td>
+                @if (@cs.status)
+                {
+                    <td>
+                        <p class="text-success text-xl" style="font-weight: bold;">Passed</p>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <p class="text-danger" style="font-weight: bold;">Not passed</p>
+                    </td>
+                }
             </tr>
 
         }
     </tbody>
 </table>
 <form asp-page-handler="UpdateFinalScoore">
-    <button>Calculate Score</button>
+    <input type="hidden" name="classSubjectId" value="@Model.ClassSubjectId"/>
+    <input type="hidden" name="subjectId" value="@Model.SubjectId" />
+    <button>Update Final Score</button>
 </form>

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProjectPRN_FAP.Bussiness.DTO;
@@ -5,6 +6,7 @@ using ProjectPRN_FAP.Bussiness.IRepository;
 
 namespace ProjectPRN_FAP.Pages.Teacher.ClassPage
 {
+    [Authorize(Roles = "2")]
     public class UpdateScoreModel : PageModel
     {
         ISubjectGradeRepository _subjectGradeRepository;
@@ -43,18 +45,17 @@ namespace ProjectPRN_FAP.Pages.Teacher.ClassPage
             GetData(classSubjectId, subjectId);
         }
 
-        private IActionResult GetData(int classSubjectId, int subjectId)
+        private void GetData(int classSubjectId, int subjectId)
         {
             subjectGradeDTOs = _subjectGradeRepository.GetBySubjectId(subjectId);
             classSubjectDTO = _classSubjectRepository.GetById(classSubjectId);
-            return Page();
         }
 
 
         public void OnPost(int classSubjectId, int subjectId, int gradeId)
         {
             GetData(classSubjectId, subjectId);
-
+            GradeId = gradeId;
             foreach (DetailScoreDTO mark in classGradeDTO.DetailScores)
             {
                 _detailScoreRepository.Update(mark);

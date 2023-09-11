@@ -33,7 +33,7 @@ namespace ProjectPRN_FAP.Pages.Common
                 }
                 else
                 {
-                    return RedirectToPage("/Student/Index");
+                    return RedirectToPage("/Student/ClassPage/ViewClass");
                 }
             }
             return Page();

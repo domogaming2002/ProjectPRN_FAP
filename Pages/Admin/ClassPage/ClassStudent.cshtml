@@ -85,10 +85,15 @@
                                 </td>
 
                                 <td>
-                                    <button type="button" class="btn btn-link btn-sm btn-rounded"
-                                        @*onclick="openPopup('@sDTO.SemesterName','@sDTO.StartDate','@sDTO.EndDate','@sDTO.SemesterId')"*@>
-                                        Delete
-                                    </button>
+                                    <form asp-page-handler="deleteStudentFromClass">
+                                        <input type="hidden" name="classSubjectId" value="@Model.classSubjectDTO.ClassSubjectId" />
+                                        <input type="hidden" name="studentClassSubjectId" value="@scDTO.StudentClassSubjectId" />
+                                        <input type="hidden" name="subjectId" value="@Model.classSubjectDTO.SubjectId"/>
+                                        <input type="hidden" name="studentId" value="@scDTO.StudentId" />
+                                        <button type="submit" class="btn btn-link btn-sm btn-rounded">
+                                            Delete
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
 

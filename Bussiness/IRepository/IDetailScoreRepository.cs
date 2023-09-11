@@ -9,6 +9,7 @@ namespace ProjectPRN_FAP.Bussiness.IRepository
          List<DetailScoreDTO>? GetList();
 
         DetailScoreDTO? GetById(int detailScoreId);
+        List<DetailScoreDTO>? GetByTranscriptId(int transcriptId);
 
          Boolean Create(DetailScoreDTO detailScore);
 

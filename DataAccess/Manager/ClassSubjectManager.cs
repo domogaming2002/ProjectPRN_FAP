@@ -20,9 +20,9 @@ namespace ProjectPRN_FAP.DataAccess.Manager
             return _context.ClassSubjects.Include(cs => cs.Class).Include(cs => cs.Subject).Include(cs => cs.Teacher.User).Include(cs => cs.Teacher).Include(cs => cs.Semester).FirstOrDefault(s => s.ClassSubjectId == classSubjectId);
         }
 
-        public ClassSubject? GetByAllId(int classId, int subjectId,int teacherId, int semesterId)
+        public ClassSubject? GetByAllId(int classId, int subjectId, int semesterId)
         {
-            return _context.ClassSubjects.FirstOrDefault(s =>  s.ClassId == classId && s.SubjectId == subjectId && s.TeacherId == teacherId && s.SemesterId == semesterId);
+            return _context.ClassSubjects.FirstOrDefault(s =>  s.ClassId == classId && s.SubjectId == subjectId && s.SemesterId == semesterId && s.IsDelete == false);
         }
         public List<ClassSubject>? GetListBySemester(int semesterId)
         {

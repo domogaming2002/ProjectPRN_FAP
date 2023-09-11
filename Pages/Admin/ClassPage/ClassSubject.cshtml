@@ -75,8 +75,6 @@
                 <th>Teacher</th>
                 <th>Semester</th>
                 <th>View Student</th>
-                <th>View Score</th>
-                <th>View Score All Class</th>
                 <th>Update</th>
                 <th>Delete</th>
             </tr>
@@ -105,14 +103,6 @@
                     </td>
 
                     <td>
-                        <a asp-page="/Admin/ClassPage/ClasAddScore" asp-route-classSubjectId="@cs.ClassSubjectId" asp-route-subjectId="@cs.SubjectId">View Add Score</a>
-                    </td>
-
-                    <td>
-                        <a asp-page="/Admin/ClassPage/ClassAllScore" asp-route-classSubjectId="@cs.ClassSubjectId" asp-route-subjectId="@cs.SubjectId">View Score All Class</a>
-                    </td>
-
-                    <td>
                         <button type="button" class="btn btn-link btn-sm btn-rounded"
                             @*onclick="openPopupDelete('@sDTO.SubjectId')"*@>
                             Delete
@@ -130,3 +120,12 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    $('#tablePagnation').DataTable({
+        "pagingType": "full_numbers" // "simple" option for 'Previous' and 'Next' buttons only
+    });
+
+ 
+
+</script>

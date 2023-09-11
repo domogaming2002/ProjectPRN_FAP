@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProjectPRN_FAP.Bussiness.DTO;
@@ -6,6 +7,7 @@ using ProjectPRN_FAP.Bussiness.Repository;
 
 namespace ProjectPRN_FAP.Pages.Admin.ClassPage
 {
+    [Authorize(Roles = "1")]
     public class ClassModel : PageModel
     {
 

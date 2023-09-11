@@ -50,6 +50,11 @@ namespace ProjectPRN_FAP.Bussiness.Repository
             return _mapper.Map<DetailScoreDTO>(manager.GetById(detailScoreId));
         }
 
+        public List<DetailScoreDTO>? GetByTranscriptId(int transcriptId)
+        {
+            return _mapper.Map<List<DetailScoreDTO>>(manager.GetByTranscriptId(transcriptId));
+        }
+
         public List<DetailScoreDTO>? GetList()
         {
             return _mapper.Map<List<DetailScoreDTO>>(manager.GetList());

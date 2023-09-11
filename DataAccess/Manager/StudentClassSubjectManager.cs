@@ -24,7 +24,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
 
         public StudentClassSubject? GetByStudentIdClassSubjectId(int studentId, int classSubjectId)
         {
-            return _context.StudentClassSubjects.Include(c => c.Student).Include(c => c.Student.User).FirstOrDefault(s => s.StudentId == studentId && s.ClasSubjectId == classSubjectId);
+            return _context.StudentClassSubjects.Include(c => c.Student).Include(c => c.Student.User).FirstOrDefault(s => s.StudentId == studentId && s.ClasSubjectId == classSubjectId && s.IsDelete == false);
         }
         public List<StudentClassSubject>? GetListByStudentId(int studentId)
         {

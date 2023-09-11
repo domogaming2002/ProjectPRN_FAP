@@ -1,12 +1,15 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProjectPRN_FAP.Bussiness.DTO;
 using ProjectPRN_FAP.Bussiness.IRepository;
 using ProjectPRN_FAP.Bussiness.Repository;
 using ProjectPRN_FAP.DataAccess.Models;
+using System.Data;
 
 namespace ProjectPRN_FAP.Pages.Admin.ClassPage
 {
+    [Authorize(Roles = "1")]
     public class ClassStudentModel : PageModel
     {
 
@@ -21,6 +24,7 @@ namespace ProjectPRN_FAP.Pages.Admin.ClassPage
         public ClassSubjectDTO classSubjectDTO { get; set; }
         public List<StudentClassSubjectDTO> studentClassSubjectDTOs { get; set; }
         public List<StudentDTO> studentDTOs { get; set; }
+        public List<StudentDTO> studentNotInClassDTOs { get; set; }
 
 
         public ClassStudentModel(IClassSubjectRepository classSubjectRepository, IStudentClassSubjectRepository studentClassSubjectRepository, IStudentRepository studentRepository, ITranscriptRepository transcriptRepository, ISubjectGradeRepository subjectGradeRepository, IDetailScoreRepository detailScoreRepository)
@@ -38,16 +42,23 @@ namespace ProjectPRN_FAP.Pages.Admin.ClassPage
             GetData(classSubjectId);
         }
 
-        private IActionResult GetData(int classSubjectId)
+        private void GetData(int classSubjectId)
         {
             classSubjectDTO = _classSubjectRepository.GetById(classSubjectId);
-            if (classSubjectDTO == null)
-            {
-                return RedirectToPage("/Admin/ClassPage/ClassSubject");
-            }
             studentClassSubjectDTOs = _studentClassSubjectRepository.GetListByClassSubjectId(classSubjectId);
             studentDTOs = _studentRepository.GetList();
-            return Page();
+            for (int i = studentDTOs.Count - 1; i >= 0; i--)
+            {
+                StudentDTO s = studentDTOs[i];
+                foreach (StudentClassSubjectDTO sc in studentClassSubjectDTOs)
+                {
+                    if (sc.StudentId == s.StudentId)
+                    {
+                        studentDTOs.RemoveAt(i);
+                        break;
+                    }
+                }
+            }
         }
 
         public void OnPostAddStudentToClass(int classSubjectId, int studentId, int subjectId)
@@ -79,9 +90,29 @@ namespace ProjectPRN_FAP.Pages.Admin.ClassPage
                     };
                     _detailScoreRepository.Create(detailScoreDTO);
                 }
-                
+
             }
             GetData(classSubjectId);
+
+        }
+
+        public void OnPostDeleteStudentFromClass(int studentClassSubjectId, int studentId, int classSubjectId, int subjectId)
+        {
+            StudentClassSubjectDTO s = new StudentClassSubjectDTO()
+            {
+                StudentClassSubjectId = studentClassSubjectId,
+            };
+
+            _studentClassSubjectRepository.Delelte(s);
+            TranscriptDTO t = _transcriptRepository.GetByAllId(classSubjectId, studentId, subjectId);
+            _transcriptRepository.Delelte(t);
+            List<DetailScoreDTO> d = _detailScoreRepository.GetByTranscriptId(t.TranscriptId);
+            foreach(DetailScoreDTO dTO in d)
+            {
+                _detailScoreRepository.Delelte(dTO);
+            }
+            GetData(classSubjectId);
+
 
         }
     }

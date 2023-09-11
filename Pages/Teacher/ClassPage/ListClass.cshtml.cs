@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProjectPRN_FAP.Bussiness.DTO;
@@ -7,6 +8,7 @@ using System.Security.Claims;
 
 namespace ProjectPRN_FAP.Pages.Teacher.ClassPage
 {
+    [Authorize(Roles = "2")]
     public class ListClassModel : PageModel
     {
 

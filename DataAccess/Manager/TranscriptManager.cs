@@ -26,11 +26,17 @@ namespace ProjectPRN_FAP.DataAccess.Manager
             return _context.Transcripts.Include(t => t.Students).Include(t => t.Students.User).Where(s => s.ClassSubjectId == classSubjectId && s.IsDelete == false).ToList();
 
         }
+
+        public Transcript? GetByAllId(int classSubjectId, int studentId, int subjectId)
+        {
+            return _context.Transcripts.Include(t => t.Students).Include(t => t.Students.User).FirstOrDefault(s => s.ClassSubjectId == classSubjectId && s.StudentId == studentId && s.SubjectId == subjectId && s.IsDelete == false);
+        }
         public List<Transcript>? GetByStudentId(int studentId)
         {
             return _context.Transcripts.Include(t => t.Students).Include(t => t.Students.User)
                 .Include(t => t.ClassSubject).Include(t => t.ClassSubject.Class)
                 .Include(t => t.Subject).Include(t => t.ClassSubject.Semester)
+                .Include(t => t.ClassSubject.Teacher.User)
                 .Where(s => s.StudentId == studentId && s.IsDelete == false).ToList();
         }
 
@@ -66,7 +72,7 @@ namespace ProjectPRN_FAP.DataAccess.Manager
             try
             {
                 Transcript t = GetById(transcript.TranscriptId);
-                //teacherUpdate.TeacherCode = teacher.TeacherCode;
+                t.TotalScore = transcript.TotalScore;
                 _context.Transcripts.Update(t);
                 _context.SaveChanges();
                 return true;

@@ -12,7 +12,7 @@
                 <th>Subject</th>
                 <th>Semester</th>
                 <th>Update Score</th>
-                <th>View Scoore</th>
+                <th>View Score</th>
             </tr>
         </thead>
         <tbody>
@@ -32,7 +32,7 @@
                     </td>
 
                     <td>
-                        <a asp-page="/Teacher/ClassPage/UpdateScore" asp-route-classSubjectId="@cs.ClassSubjectId" asp-route-subjectId="@cs.SubjectId">Update scoore</a>
+                        <a asp-page="/Teacher/ClassPage/UpdateScore" asp-route-classSubjectId="@cs.ClassSubjectId" asp-route-subjectId="@cs.SubjectId">Update score</a>
                     </td>
 
                     <td>
@@ -45,3 +45,10 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    $('#tablePagnation').DataTable({
+        "pagingType": "full_numbers" // "simple" option for 'Previous' and 'Next' buttons only
+    });
+
+</script>
